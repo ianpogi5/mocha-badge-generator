@@ -1,0 +1,44 @@
+{
+    "name": "mocha-badge-generator",
+    "version": "0.1.0",
+    "description": "Mocha reporter which outputs badge with the number of tests passed",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ianpogi5/mocha-badge-generator.git"
+    },
+    "keywords": [
+        "mocha",
+        "reporter",
+        "badge",
+        "shield",
+        "svg"
+    ],
+    "author": "Ian Dela Cruz <iandc76@gmail.com>",
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/ianpogi5/mocha-badge-generator/issues"
+    },
+    "homepage": "https://github.com/ianpogi5/mocha-badge-generator",
+    "dependencies": {
+        "badge-up": "^2.3.0",
+        "svg2png": "^4.1.1"
+    },
+    "devDependencies": {
+        "chai": "^4.1.2",
+        "mocha": "^5.2.0"
+    },
+    "prettier": {
+        "printWidth": 80,
+        "tabWidth": 4,
+        "useTabs": false,
+        "semi": true,
+        "singleQuote": true,
+        "trailingComma": "all",
+        "bracketSpacing": true,
+        "arrowParens": "avoid"
+    }
+}

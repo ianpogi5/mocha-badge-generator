@@ -3,6 +3,9 @@
 ![Test](test/badge.svg)
 [![Build Status](https://travis-ci.com/ianpogi5/mocha-badge-generator.png?branch=master)](https://travis-ci.org/ianpogi5/mocha-badge-generator)
 [![codecov](https://codecov.io/gh/ianpogi5/mocha-badge-generator/branch/master/graph/badge.svg)](https://codecov.io/gh/ianpogi5/mocha-badge-generator)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ianpogi5/mocha-badge-generator/issues)
+
+[![https://nodei.co/npm/mocha-badge-generator.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/mocha-badge-generator.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/mocha-badge-generator)
 
 Mocha Badge Generator is a [Mocha](https://mochajs.org/) reporter which outputs a badge (SVG file) with the number of tests passed and failed which you can embed in your readme file.
 

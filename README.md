@@ -1,7 +1,7 @@
 # Mocha Badge Generator
 
 ![Test](test/badge.svg)
-[![Build Status](https://travis-ci.org/ianpogi5/mocha-badge-generator.png?branch=master)](https://travis-ci.org/ianpogi5/mocha-badge-generator)
+[![Build Status](https://travis-ci.com/ianpogi5/mocha-badge-generator.png?branch=master)](https://travis-ci.org/ianpogi5/mocha-badge-generator)
 
 Mocha Badge Generator is a [Mocha](https://mochajs.org/) reporter which outputs a badge (SVG file) with the number of tests passed and failed which you can embed in your readme file.
 

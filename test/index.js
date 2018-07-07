@@ -65,4 +65,12 @@ describe('mocha badge reporter', function() {
         };
         checkFile();
     });
+
+    after(() => {
+        const runner = new events.EventEmitter();
+        BadgeGenerator(runner);
+        runner.emit('pass');
+        runner.emit('pass');
+        runner.emit('end');
+    });
 });

@@ -1,5 +1,7 @@
 # Mocha Badge Generator
 
+![Test](test/badge.svg)
+
 Mocha Badge Generator is a [Mocha](https://mochajs.org/) reporter which outputs a badge (SVG file) with the number of tests passed and failed which you can embed in your readme file.
 
 ## Install

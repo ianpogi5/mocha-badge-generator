@@ -1,7 +1,7 @@
 # Mocha Badge Generator
 
 ![Test](test/badge.svg)
-[![Build Status](https://travis-ci.com/ianpogi5/mocha-badge-generator.png?branch=master)](https://travis-ci.org/ianpogi5/mocha-badge-generator)
+[![Build Status](https://travis-ci.com/ianpogi5/mocha-badge-generator.png?branch=master)](https://travis-ci.com/ianpogi5/mocha-badge-generator)
 [![codecov](https://codecov.io/gh/ianpogi5/mocha-badge-generator/branch/master/graph/badge.svg)](https://codecov.io/gh/ianpogi5/mocha-badge-generator)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/ianpogi5/mocha-badge-generator/issues)
 

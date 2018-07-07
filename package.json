@@ -4,7 +4,8 @@
     "description": "Mocha reporter which outputs badge with the number of tests passed and failed.",
     "main": "index.js",
     "scripts": {
-        "test": "mocha"
+        "test": "mocha",
+        "coverage": "nyc --reporter=lcov npm run test"
     },
     "repository": {
         "type": "git",
@@ -29,7 +30,8 @@
     },
     "devDependencies": {
         "chai": "^4.1.2",
-        "mocha": "^5.2.0"
+        "mocha": "^5.2.0",
+        "nyc": "^11.6.0"
     },
     "prettier": {
         "printWidth": 80,

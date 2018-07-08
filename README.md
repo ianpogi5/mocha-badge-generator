@@ -23,10 +23,9 @@ In your `package.json`, add reporter to your test script.
 
 ```json
 {
-    ...
-    "test": "mocha --reporter mocha-badge-generator",
-    ...
-
+    "scripts": {
+        "test": "mocha --reporter mocha-badge-generator",
+    }
 }
 ```
 
@@ -48,9 +47,9 @@ Sample config for changing output to PNG.
 
 ```json
 {
-    ...
-    "test": "MOCHA_BADGE_GEN_FORMAT=png MOCHA_BADGE_GEN_OUTPUT=badge.png mocha --reporter mocha-badge-generator",
-    ...
+    "scripts": {
+        "test": "MOCHA_BADGE_GEN_FORMAT=png MOCHA_BADGE_GEN_OUTPUT=badge.png mocha --reporter mocha-badge-generator",
+    }
 }
 ```
 

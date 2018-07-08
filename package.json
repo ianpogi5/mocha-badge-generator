@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "mocha",
+        "test-watch": "mocha -w",
         "coverage": "nyc --reporter=lcov npm run test"
     },
     "repository": {

@@ -7,7 +7,9 @@
 
 [![https://nodei.co/npm/mocha-badge-generator.png?downloads=true&downloadRank=true&stars=true](https://nodei.co/npm/mocha-badge-generator.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/mocha-badge-generator)
 
-Mocha Badge Generator is a [Mocha](https://mochajs.org/) reporter which outputs a badge (SVG file) with the number of tests passed and failed which you can embed in your readme file.
+No need for 3rd party to generate badge for your tests. You can generate it locally by running your test script.
+
+Mocha Badge Generator is a [Mocha](https://mochajs.org/) reporter which outputs a badge (SVG or PNG file) with the number of tests passed and failed which you can embed in your readme file.
 
 ## Install
 
@@ -17,18 +19,43 @@ npm install mocha-badge-generator --save-dev
 
 ## Usage
 
-```bash
-mocha --reporter mocha-badge-generator
+In your `package.json`, add reporter to your test script.
+
+```json
+{
+    ...
+    "test": "mocha --reporter mocha-badge-generator",
+    ...
+
+}
 ```
 
-Default out file is `test/badge.svg`.
+Default output file is `test/badge.svg`.
 
 ## Configuration
 
-```bash
-export MOCHA_BADGE_GEN_SUBJECT=Tests
-export MOCHA_BADGE_GEN_OK_COLOR=brightgreen
-export MOCHA_BADGE_GEN_KO_COLOR=red
-export MOCHA_BADGE_GEN_OUTPUT='./test/badge.svg'
-export MOCHA_BADGE_GEN_FORMAT=svg
+You can change the output by defining environment variables in your test script.
+
+| Config                   | Default          | Description                                                                                                                                              |
+| ------------------------ | :--------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| MOCHA_BADGE_GEN_SUBJECT  | Tests            | The text that appears the left side of the badge.                                                                                                        |
+| MOCHA_BADGE_GEN_OK_COLOR | brightgreen      | The color when all tests pass. Possible colors are brightgreen, green, yellow, yellowgreen, orange, red, blue, grey, gray, lightgrey, lightgray, purple. |
+| MOCHA_BADGE_GEN_KO_COLOR | red              | The color when at least 1 test fail. See above for possible colors.                                                                                      |
+| MOCHA_BADGE_GEN_OUTPUT   | ./test/badge.svg | Name of the output file.                                                                                                                                 |
+| MOCHA_BADGE_GEN_FORMAT   | svg              | Output file format. Possible values are svg and png.                                                                                                     |
+
+Sample config for changing output to PNG.
+
+```json
+{
+    ...
+    "test": "MOCHA_BADGE_GEN_FORMAT=png MOCHA_BADGE_GEN_OUTPUT=badge.png mocha --reporter mocha-badge-generator",
+    ...
+}
+```
+
+## Adding to your README
+
+```markdown
+![Test](test/badge.svg)
 ```

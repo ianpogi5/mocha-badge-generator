@@ -21,6 +21,12 @@
         "svg"
     ],
     "author": "Ian Dela Cruz <iandc76@gmail.com>",
+    "contributors": [
+      "Brett Zamir"
+    ],
+    "engines": {
+      "node": ">=6.0.0"
+    },
     "license": "MIT",
     "bugs": {
         "url": "https://github.com/ianpogi5/mocha-badge-generator/issues"

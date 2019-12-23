@@ -8,12 +8,14 @@ const BADGE = './test/badge.svg';
 const BADGE_FAILED = './test/failed.svg';
 const BADGE_PASSED = './test/passed.svg';
 const BADGE_PNG = './test/badge.png';
-const BADGE_PNG_PASSED = './test/passed.png';
+// const BADGE_PNG_PASSED = './test/passed.png';
 
 try {
     fs.accessSync(BADGE, fs.constants.R_OK | fs.constants.W_OK);
     fs.unlinkSync(BADGE);
-} catch (e) {}
+} catch (e) {
+    //
+}
 
 describe('mocha badge reporter', function() {
     it('should register test failed 3/4', function(done) {
@@ -71,7 +73,7 @@ describe('mocha badge reporter', function() {
                 assert.ok(false);
                 done();
             })
-            .catch(err => {
+            .catch(() => {
                 assert.ok(true);
                 done();
             });

@@ -1,6 +1,6 @@
 {
     "name": "mocha-badge-generator",
-    "version": "0.2.2",
+    "version": "0.3.0",
     "description": "Mocha reporter which outputs badge with the number of tests passed and failed.",
     "main": "index.js",
     "scripts": {
@@ -20,7 +20,7 @@
         "svg"
     ],
     "author": "Ian Dela Cruz <iandc76@gmail.com>",
-    "license": "GPL-3.0",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/ianpogi5/mocha-badge-generator/issues"
     },
@@ -32,7 +32,7 @@
     "devDependencies": {
         "chai": "^4.1.2",
         "mocha": "^5.2.0",
-        "nyc": "^11.6.0"
+        "nyc": "^14.1.1"
     },
     "prettier": {
         "printWidth": 80,

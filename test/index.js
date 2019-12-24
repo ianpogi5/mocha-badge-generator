@@ -8,6 +8,7 @@ const BADGE = './test/badge.svg';
 const BADGE_FAILED = './test/failed.svg';
 const BADGE_PASSED = './test/passed.svg';
 const BADGE_PNG = './test/badge.png';
+const BADGE_PNG_BY_OPTIONS = './test/badge-by-options.png';
 // const BADGE_PNG_PASSED = './test/passed.png';
 
 try {
@@ -117,6 +118,37 @@ describe('mocha badge reporter', function() {
         process.env.MOCHA_BADGE_GEN_KO_COLOR = 'e05d44';
         process.env.MOCHA_BADGE_GEN_FORMAT = 'svg';
         process.env.MOCHA_BADGE_GEN_OUTPUT = './test/badge.svg';
+
+        // sync2png takes a bit of time
+    }).timeout(10000);
+
+    it('should output png', function(done) {
+        const reporterOptions = {
+            badge_subject: 'PNG',
+            badge_ok_color: 'blue',
+            badge_ko_color: 'purple',
+            badge_format: 'png',
+            badge_output: './test/badge-by-options.png'
+        };
+
+        const runner = new events.EventEmitter();
+        BadgeGenerator(runner, {reporterOptions})
+            .then(() => {
+                assert.isTrue(fs.existsSync(BADGE_PNG_BY_OPTIONS));
+                fs.unlink(BADGE_PNG_BY_OPTIONS, function() {
+                    done();
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                assert.ok(false);
+                done();
+            });
+        runner.emit('pass');
+        runner.emit('pass');
+        runner.emit('pass');
+        runner.emit('pass');
+        runner.emit('end');
 
         // sync2png takes a bit of time
     }).timeout(10000);

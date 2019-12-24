@@ -33,17 +33,27 @@ Default output file is `test/badge.svg`.
 
 ## Configuration
 
-You can change the output by defining environment variables in your test script.
+You can change the output by defining Mocha `--reporter-options` or environment variables in your test script.
 
-| Config                   | Default          | Description                                                                                                                                              |
-| ------------------------ | :--------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| MOCHA_BADGE_GEN_SUBJECT  | Tests            | The text that appears the left side of the badge.                                                                                                        |
-| MOCHA_BADGE_GEN_OK_COLOR | 44cc11 (brightgreen)      | The color when all tests pass. Colors may be a 6-digit hex code or a named CSS color. |
-| MOCHA_BADGE_GEN_KO_COLOR | e05d44 (red)              | The color when at least 1 test fail. See above for possible colors.                                                                                      |
-| MOCHA_BADGE_GEN_OUTPUT   | ./test/badge.svg | Name of the output file.                                                                                                                                 |
-| MOCHA_BADGE_GEN_FORMAT   | svg              | Output file format. Possible values are svg and png.                                                                                                     |
+| `--reporter-option` | Env variable | Default  | Description |
+|---------------------|--------------| :------: |-------------|
+| badge_subject | MOCHA_BADGE_GEN_SUBJECT  | Tests | The text that appears the left side of the badge. |
+| badge_ok_color | MOCHA_BADGE_GEN_OK_COLOR | 44cc11 (brightgreen) | The color when all tests pass. Colors may be a 6-digit hex code or a named CSS color. |
+| badge_ko_color | MOCHA_BADGE_GEN_KO_COLOR | e05d44 (red) | The color when at least 1 test fail. See above for possible colors. |
+| badge_output | MOCHA_BADGE_GEN_OUTPUT | ./test/badge.svg | Name of the output file. |
+| badge_format | MOCHA_BADGE_GEN_FORMAT | svg | Output file format. Possible values are svg and png. |
 
 Sample config for changing output to PNG.
+
+```json
+{
+    "scripts": {
+        "test": "mocha --reporter mocha-badge-generator --reporter-options=badge_format=png,badge_output=badge.png",
+    }
+}
+```
+
+Alternatively, you may use environmental variables:
 
 ```json
 {

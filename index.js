@@ -2,8 +2,13 @@ const fs = require('fs');
 const badge = require('badge-up');
 const svg2png = require('svg2png');
 
-function BadgeGenerator(runner) {
+function BadgeGenerator(runner, options) {
     return new Promise((resolve, reject) => {
+        const {
+            badge_subject, badge_ok_color, badge_ko_color,
+            badge_format, badge_output
+        } = (options && options.reporterOptions) || {};
+
         let passes = 0;
         let failures = 0;
 
@@ -18,13 +23,16 @@ function BadgeGenerator(runner) {
         });
 
         runner.on('end', function() {
-            const subject = process.env.MOCHA_BADGE_GEN_SUBJECT || 'Tests';
-            const okColor =
+            const subject = badge_subject ||
+                process.env.MOCHA_BADGE_GEN_SUBJECT || 'Tests';
+            const okColor = badge_ok_color ||
                 process.env.MOCHA_BADGE_GEN_OK_COLOR || '44cc11'; // Bright green
-            const koColor = process.env.MOCHA_BADGE_GEN_KO_COLOR || 'e05d44'; // Red
-            const foutput =
+            const koColor = badge_ko_color ||
+                process.env.MOCHA_BADGE_GEN_KO_COLOR || 'e05d44'; // Red
+            const foutput = badge_output ||
                 process.env.MOCHA_BADGE_GEN_OUTPUT || './test/badge.svg';
-            const format = process.env.MOCHA_BADGE_GEN_FORMAT || 'svg';
+            const format = badge_format ||
+                process.env.MOCHA_BADGE_GEN_FORMAT || 'svg';
 
             const color = failures > 0 ? koColor : okColor;
             const status = passes + '/' + (passes + failures);

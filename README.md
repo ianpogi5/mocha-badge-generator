@@ -38,8 +38,8 @@ You can change the output by defining environment variables in your test script.
 | Config                   | Default          | Description                                                                                                                                              |
 | ------------------------ | :--------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | MOCHA_BADGE_GEN_SUBJECT  | Tests            | The text that appears the left side of the badge.                                                                                                        |
-| MOCHA_BADGE_GEN_OK_COLOR | brightgreen      | The color when all tests pass. Possible colors are brightgreen, green, yellow, yellowgreen, orange, red, blue, grey, gray, lightgrey, lightgray, purple. |
-| MOCHA_BADGE_GEN_KO_COLOR | red              | The color when at least 1 test fail. See above for possible colors.                                                                                      |
+| MOCHA_BADGE_GEN_OK_COLOR | 44cc11 (brightgreen)      | The color when all tests pass. Colors may be a 6-digit hex code or a named CSS color. |
+| MOCHA_BADGE_GEN_KO_COLOR | e05d44 (red)              | The color when at least 1 test fail. See above for possible colors.                                                                                      |
 | MOCHA_BADGE_GEN_OUTPUT   | ./test/badge.svg | Name of the output file.                                                                                                                                 |
 | MOCHA_BADGE_GEN_FORMAT   | svg              | Output file format. Possible values are svg and png.                                                                                                     |
 

@@ -113,8 +113,8 @@ describe('mocha badge reporter', function() {
 
         // restore default
         process.env.MOCHA_BADGE_GEN_SUBJECT = 'Tests';
-        process.env.MOCHA_BADGE_GEN_OK_COLOR = 'brightgreen';
-        process.env.MOCHA_BADGE_GEN_KO_COLOR = 'red';
+        process.env.MOCHA_BADGE_GEN_OK_COLOR = '44cc11';
+        process.env.MOCHA_BADGE_GEN_KO_COLOR = 'e05d44';
         process.env.MOCHA_BADGE_GEN_FORMAT = 'svg';
         process.env.MOCHA_BADGE_GEN_OUTPUT = './test/badge.svg';
 

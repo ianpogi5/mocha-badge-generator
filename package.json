@@ -22,10 +22,10 @@
     ],
     "author": "Ian Dela Cruz <iandc76@gmail.com>",
     "contributors": [
-      "Brett Zamir"
+        "Brett Zamir"
     ],
     "engines": {
-      "node": ">=6.0.0"
+        "node": ">=6.0.0"
     },
     "license": "MIT",
     "bugs": {
@@ -37,10 +37,10 @@
         "svg2png": "^4.1.1"
     },
     "devDependencies": {
-        "chai": "^4.1.2",
+        "chai": "^4.2.0",
         "eslint": "^6.8.0",
-        "mocha": "^5.2.0",
-        "nyc": "^14.1.1"
+        "mocha": "^6.2.2",
+        "nyc": "^15.0.0"
     },
     "prettier": {
         "printWidth": 80,

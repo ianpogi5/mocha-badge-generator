@@ -38,8 +38,8 @@ You can change the output by defining Mocha `--reporter-options` or environment 
 | `--reporter-option` | Env variable | Default  | Description |
 |---------------------|--------------| :------: |-------------|
 | badge_subject | MOCHA_BADGE_GEN_SUBJECT  | Tests | The text that appears the left side of the badge. |
-| badge_ok_color | MOCHA_BADGE_GEN_OK_COLOR | 44cc11 (brightgreen) | The color when all tests pass. Colors may be a 6-digit hex code or a named CSS color. |
-| badge_ko_color | MOCHA_BADGE_GEN_KO_COLOR | e05d44 (red) | The color when at least 1 test fail. See above for possible colors. |
+| badge_ok_color | MOCHA_BADGE_GEN_OK_COLOR | 44cc11 (brightgreen) | The color when all tests pass. Colors may be a 6-digit hex code or a named CSS color. If upgrading from <= 0.3.0, please note that if you were not relying on the default colors, the CSS named colors may differ from the [`badge-up` builtin colors](https://github.com/yahoo/badge-up/blob/b6f073624fee0d5ee5341a90a9cfb9ff6ae52034/index.js#L51-L64) we were using previously; use the corresponding hex code (without the `#`), and convert to 6 digits (e.g., `4C1` to `44CC11`). |
+| badge_ko_color | MOCHA_BADGE_GEN_KO_COLOR | e05d44 (red) | The color when at least 1 test fail. See above for possible colors (and a note about upgrading from <= 0.3.0). |
 | badge_output | MOCHA_BADGE_GEN_OUTPUT | ./test/badge.svg | Name of the output file. |
 | badge_format | MOCHA_BADGE_GEN_FORMAT | svg | Output file format. Possible values are svg and png. |
 

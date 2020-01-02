@@ -1,6 +1,5 @@
 const fs = require('fs');
 const badge = require('badge-up');
-const svg2png = require('svg2png');
 
 function BadgeGenerator(runner, options) {
     return new Promise((resolve, reject) => {
@@ -49,7 +48,7 @@ function BadgeGenerator(runner, options) {
                 }
 
                 if (format === 'png') {
-                    output = svg2png.sync(output);
+                    output = require('svg2png').sync(output);
                 }
 
                 fs.writeFile(foutput, output, writeErr => {

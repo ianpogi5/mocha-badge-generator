@@ -1,6 +1,6 @@
 const events = require('events');
 const fs = require('fs');
-const assert = require('chai').assert;
+const {assert} = require('chai');
 
 const BadgeGenerator = require('../');
 

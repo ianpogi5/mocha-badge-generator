@@ -11,8 +11,6 @@ function BadgeGenerator(runner, options) {
         let passes = 0;
         let failures = 0;
 
-        runner.on('start', function() {});
-
         runner.on('pass', function() {
             passes++;
         });
@@ -42,11 +40,7 @@ function BadgeGenerator(runner, options) {
                 subject,
                 [status, color]
             ];
-            badge.v2(sections, (err, output) => {
-                if (err) {
-                    return reject(err);
-                }
-
+            badge.v2(sections).then((output) => {
                 if (format === 'png') {
                     output = require('svg2png').sync(output);
                 }
@@ -57,7 +51,12 @@ function BadgeGenerator(runner, options) {
                     }
                     resolve();
                 });
-            });
+            }).catch(
+                /* istanbul ignore next */
+                (err) => {
+                    return reject(err);
+                }
+            );
         });
     });
 }

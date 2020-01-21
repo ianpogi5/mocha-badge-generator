@@ -5,9 +5,9 @@
     "main": "index.js",
     "scripts": {
         "lint": "eslint .",
-        "test": "mocha",
+        "test": "nyc --all --reporter=text mocha",
         "test-watch": "mocha -w",
-        "coverage": "nyc --reporter=lcov npm run test"
+        "coverage": "nyc --all --reporter=lcov npm run test"
     },
     "repository": {
         "type": "git",
@@ -33,7 +33,7 @@
     },
     "homepage": "https://github.com/ianpogi5/mocha-badge-generator",
     "dependencies": {
-        "badge-up": "git+https://github.com/brettz9/badge-up.git#npm-and-testing"
+        "badge-up": "https://github.com/brettz9/badge-up#npm-and-testing-with-promise"
     },
     "devDependencies": {
         "chai": "^4.2.0",

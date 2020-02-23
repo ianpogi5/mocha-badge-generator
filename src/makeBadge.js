@@ -2,7 +2,7 @@ const fs = require('fs');
 const {resolve: pathResolve} = require('path');
 const badge = require('badge-up').v2;
 
-function makeBadge ({passes, failures, options}) {
+async function makeBadge ({passes, failures, options}) {
     const {
         badge_subject, badge_ok_color, badge_ko_color,
         badge_format, badge_output
@@ -27,19 +27,18 @@ function makeBadge ({passes, failures, options}) {
         subject,
         [status, color]
     ];
-    return badge(sections).then((output) => {
-        if (format === 'png') {
-            output = require('svg2png').sync(output);
-        }
+    let output = await badge(sections);
+    if (format === 'png') {
+        output = require('svg2png').sync(output);
+    }
 
-        return new Promise((resolve, reject) => {
-            fs.writeFile(foutput, output, writeErr => {
-                if (writeErr) {
-                    return reject(writeErr);
-                }
-                resolve({
-                    output: foutput
-                });
+    return new Promise((resolve, reject) => {
+        fs.writeFile(foutput, output, writeErr => {
+            if (writeErr) {
+                return reject(writeErr);
+            }
+            resolve({
+                output: foutput
             });
         });
     });

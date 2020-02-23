@@ -39,7 +39,7 @@
         "Brett Zamir"
     ],
     "engines": {
-        "node": ">=6.0.0"
+        "node": ">=7.6.0"
     },
     "license": "MIT",
     "bugs": {

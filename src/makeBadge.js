@@ -1,6 +1,6 @@
 const fs = require('fs');
 const {resolve: pathResolve} = require('path');
-const badge = require('badge-up');
+const badge = require('badge-up').v2;
 
 function makeBadge ({passes, failures, options}) {
     const {
@@ -27,17 +27,12 @@ function makeBadge ({passes, failures, options}) {
         subject,
         [status, color]
     ];
-    return new Promise((resolve, reject) => {
-        badge.v2(sections, (err, output) => {
-            /* istanbul ignore if */
-            if (err) {
-                return reject(err);
-            }
+    return badge(sections).then((output) => {
+        if (format === 'png') {
+            output = require('svg2png').sync(output);
+        }
 
-            if (format === 'png') {
-                output = require('svg2png').sync(output);
-            }
-
+        return new Promise((resolve, reject) => {
             fs.writeFile(foutput, output, writeErr => {
                 if (writeErr) {
                     return reject(writeErr);

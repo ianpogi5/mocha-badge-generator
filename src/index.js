@@ -5,8 +5,6 @@ function badgeGenerator(runner, options) {
         let passes = 0;
         let failures = 0;
 
-        runner.on('start', function() {});
-
         runner.on('pass', function() {
             passes++;
         });

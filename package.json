@@ -11,10 +11,10 @@
         "build-cli-svg": "clp --config=bin/optionDefinitions.js cli.svg",
         "bin": "./bin/mbg.js",
         "lint": "eslint .",
-        "test": "mocha",
+        "test": "nyc --all --reporter=text mocha",
         "test-watch": "mocha -w",
         "cov": "nyc --all --reporter=text npm test",
-        "coverage": "nyc --reporter=lcov npm test"
+        "coverage": "nyc --all --reporter=lcov npm test"
     },
     "nyc": {
         "exclude": [
@@ -47,7 +47,7 @@
     },
     "homepage": "https://github.com/ianpogi5/mocha-badge-generator",
     "dependencies": {
-        "badge-up": "git+https://github.com/brettz9/badge-up.git#npm-and-testing",
+        "badge-up": "https://github.com/brettz9/badge-up#npm-and-testing-with-promise",
         "command-line-basics": "^0.7.0"
     },
     "devDependencies": {

@@ -2,7 +2,7 @@ const events = require('events');
 const fs = require('fs');
 const {assert} = require('chai');
 
-const BadgeGenerator = require('../');
+const badgeGenerator = require('../');
 
 const BADGE = './test/badge.svg';
 const BADGE_FAILED = './test/failed.svg';
@@ -21,7 +21,7 @@ try {
 describe('mocha badge reporter', function() {
     it('should register test failed 3/4', function(done) {
         const runner = new events.EventEmitter();
-        BadgeGenerator(runner)
+        badgeGenerator(runner)
             .then(() => {
                 const actual = fs.readFileSync(BADGE, 'utf8');
                 const expected = fs.readFileSync(BADGE_FAILED, 'utf8');
@@ -44,7 +44,7 @@ describe('mocha badge reporter', function() {
 
     it('should register test passed 4/4', function(done) {
         const runner = new events.EventEmitter();
-        BadgeGenerator(runner)
+        badgeGenerator(runner)
             .then(() => {
                 const actual = fs.readFileSync(BADGE, 'utf8');
                 const expected = fs.readFileSync(BADGE_PASSED, 'utf8');
@@ -69,7 +69,7 @@ describe('mocha badge reporter', function() {
     it('should throw a write error', function(done) {
         process.env.MOCHA_BADGE_GEN_OUTPUT = '/invalid/path/badge.svg';
         const runner = new events.EventEmitter();
-        BadgeGenerator(runner)
+        badgeGenerator(runner)
             .then(() => {
                 assert.ok(false);
                 done();
@@ -94,7 +94,7 @@ describe('mocha badge reporter', function() {
         process.env.MOCHA_BADGE_GEN_OUTPUT = './test/badge.png';
 
         const runner = new events.EventEmitter();
-        BadgeGenerator(runner)
+        badgeGenerator(runner)
             .then(() => {
                 assert.isTrue(fs.existsSync(BADGE_PNG));
                 fs.unlink(BADGE_PNG, function() {
@@ -132,7 +132,7 @@ describe('mocha badge reporter', function() {
         };
 
         const runner = new events.EventEmitter();
-        BadgeGenerator(runner, {reporterOptions})
+        badgeGenerator(runner, {reporterOptions})
             .then(() => {
                 assert.isTrue(fs.existsSync(BADGE_PNG_BY_OPTIONS));
                 fs.unlink(BADGE_PNG_BY_OPTIONS, function() {
@@ -155,7 +155,7 @@ describe('mocha badge reporter', function() {
 
     after(() => {
         const runner = new events.EventEmitter();
-        BadgeGenerator(runner);
+        badgeGenerator(runner);
         runner.emit('pass');
         runner.emit('pass');
         runner.emit('pass');

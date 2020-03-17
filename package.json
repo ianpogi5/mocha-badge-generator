@@ -48,7 +48,8 @@
     "homepage": "https://github.com/ianpogi5/mocha-badge-generator",
     "dependencies": {
         "badge-up": "https://github.com/brettz9/badge-up#npm-and-testing-with-promise",
-        "command-line-basics": "^0.8.0"
+        "command-line-basics": "^0.8.0",
+        "fast-glob": "^3.2.2"
     },
     "devDependencies": {
         "chai": "^4.2.0",

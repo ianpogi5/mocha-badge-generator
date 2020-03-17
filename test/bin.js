@@ -25,10 +25,23 @@ describe('Binary', function () {
                 pathResolve(__dirname, 'fixtures', 'test-report.json'),
                 '--badge_output',
                 './test/results/badge.svg'
-
             ]
         );
         assert.equal(stdout, 'Saved to ./test/results/badge.svg\n');
+        assert.equal(stderr, '');
+    });
+
+    it('Builds badge from CLI (glob)', async function () {
+        const {stdout, stderr} = await execFile(
+            binaryPath,
+            [
+                '--fileGlob',
+                'test/fixtures/test-report*.json',
+                '--badge_output',
+                './test/results/badge2.svg'
+            ]
+        );
+        assert.equal(stdout, 'Saved to ./test/results/badge2.svg\n');
         assert.equal(stderr, '');
     });
 });

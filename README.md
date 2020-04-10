@@ -99,7 +99,8 @@ makeBadge({
         badge_ok_color,
         badge_ok_color,
         badge_output,
-        badge_format
+        badge_format,
+        badge_template
     }
 });
 ```
@@ -129,7 +130,8 @@ makeBadgeFromJSONFile({
     badge_ok_color,
     badge_ok_color,
     badge_output,
-    badge_format
+    badge_format,
+    badge_template
 });
 ```
 

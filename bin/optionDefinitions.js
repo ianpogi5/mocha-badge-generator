@@ -85,6 +85,21 @@ const optionDefinitions = [
         typeLabel: '{underline path}'
     },
     {
+        name: 'badge_threshold', type: Number,
+        description: 'Number of acceptable failures (such that if exceeded,' +
+            '`badge_ko_color` will be used in place of `badge_ok_color`). ' +
+            'Defaults to 0.',
+        typeLabel: '{underline acceptable failures}'
+    },
+    {
+        name: 'badge_duration_threshold', type: Number,
+        description: 'Indicates a maximum duration in milliseconds beyond which ' +
+            'the tests will be considered a failure (such that if the duration ' +
+            'is exceeded, `badge_ko_color` will be used in place of ' +
+            '`badge_ok_color`). No default as only checked if present.',
+        typeLabel: '{underline duration in ms}'
+    },
+    {
         name: 'badge_format', type: String,
         description: 'Output file format. Possible values are "svg" and ' +
             '"png". However, please note that for format "png", you must ' +

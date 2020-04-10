@@ -46,6 +46,8 @@ const BADGE_PASSED = './test/passed.svg';
 const BADGE_PNG = './test/badge.png';
 const BADGE_PNG_BY_OPTIONS = './test/badge-by-options.png';
 // const BADGE_PNG_PASSED = './test/passed.png';
+const BADGE_FAILED_BUT_OK_THRESHOLD = './test/fixtures/ok-threshold.svg';
+const BADGE_PASSES_BUT_BAD_DURATION = './test/fixtures/bad-duration.svg';
 
 try {
     fs.accessSync(BADGE, fs.constants.R_OK | fs.constants.W_OK);
@@ -84,6 +86,34 @@ describe('mocha badge reporter', function() {
         });
     });
 
+    it('should register test failed 3/4 but use passing color if higher threshold set', async function() {
+        const runner = new events.EventEmitter();
+        const suite = await makeSuite([
+            {duration: 10},
+            {duration: 2000},
+            {duration: 1000}
+        ]);
+        return new Promise(function(resolve, reject) {
+            new BadgeGenerator(runner, {reporterOptions: {badge_threshold: 1}})
+                .then(() => {
+                    const actual = fs.readFileSync(BADGE, 'utf8');
+                    const expected = fs.readFileSync(BADGE_FAILED_BUT_OK_THRESHOLD, 'utf8');
+                    assert.equal(actual, expected);
+                    fs.unlink(BADGE, function() {
+                        resolve();
+                    });
+                })
+                .catch(err => {
+                    reject(err);
+                });
+            suite.tests.forEach((test) => {
+                runner.emit('pass', test);
+            });
+            runner.emit('fail', makeFailingTest());
+            runner.emit('end');
+        });
+    });
+
     it('should register test passed 4/4', async function() {
         const runner = new events.EventEmitter();
         const suite = await makeSuite([
@@ -97,6 +127,37 @@ describe('mocha badge reporter', function() {
                 .then(() => {
                     const actual = fs.readFileSync(BADGE, 'utf8');
                     const expected = fs.readFileSync(BADGE_PASSED, 'utf8');
+                    assert.equal(actual, expected);
+                    fs.unlink(BADGE, function() {
+                        resolve();
+                    });
+                })
+                .catch(err => {
+                    reject(err);
+                });
+
+            suite.tests.forEach((test) => {
+                runner.emit('pass', test);
+            });
+            runner.emit('end');
+        });
+    });
+
+    it('should register test passed 4/4 but indicate as failure due to failing duration threshold', async function() {
+        const runner = new events.EventEmitter();
+        const suite = await makeSuite([
+            {duration: 10},
+            {duration: 2000},
+            {duration: 1000},
+            {duration: 500}
+        ]);
+        return new Promise(function(resolve, reject) {
+            new BadgeGenerator(runner, {reporterOptions: {
+                badge_duration_threshold: 3000
+            }})
+                .then(() => {
+                    const actual = fs.readFileSync(BADGE, 'utf8');
+                    const expected = fs.readFileSync(BADGE_PASSES_BUT_BAD_DURATION, 'utf8');
                     assert.equal(actual, expected);
                     fs.unlink(BADGE, function() {
                         resolve();

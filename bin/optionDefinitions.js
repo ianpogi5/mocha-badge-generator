@@ -92,6 +92,14 @@ const optionDefinitions = [
         typeLabel: '{underline acceptable failures}'
     },
     {
+        name: 'badge_slow_threshold', type: Number,
+        description: 'Indicates a maximum number of slow tests beyond which ' +
+            'the tests will be considered a failure (such that if the amount ' +
+            'is exceeded, `badge_ko_color` will be used in place of ' +
+            '`badge_ok_color`). No default as only checked if present.',
+        typeLabel: '{underline duration in ms}'
+    },
+    {
         name: 'badge_duration_threshold', type: Number,
         description: 'Indicates a maximum duration in milliseconds beyond which ' +
             'the tests will be considered a failure (such that if the duration ' +

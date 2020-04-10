@@ -174,6 +174,37 @@ describe('mocha badge reporter', function() {
         });
     });
 
+    it('should register test passed 4/4 but indicate as failure due to failing slow threshold', async function() {
+        const runner = new events.EventEmitter();
+        const suite = await makeSuite([
+            {duration: 10},
+            {duration: 2000},
+            {duration: 1000},
+            {duration: 500}
+        ]);
+        return new Promise(function(resolve, reject) {
+            new BadgeGenerator(runner, {reporterOptions: {
+                badge_slow_threshold: 1
+            }})
+                .then(() => {
+                    const actual = fs.readFileSync(BADGE, 'utf8');
+                    const expected = fs.readFileSync(BADGE_PASSES_BUT_BAD_DURATION, 'utf8');
+                    assert.equal(actual, expected);
+                    fs.unlink(BADGE, function() {
+                        resolve();
+                    });
+                })
+                .catch(err => {
+                    reject(err);
+                });
+
+            suite.tests.forEach((test) => {
+                runner.emit('pass', test);
+            });
+            runner.emit('end');
+        });
+    });
+
     it('should throw a write error', async function() {
         process.env.MOCHA_BADGE_GEN_OUTPUT = '/invalid/path/badge.svg';
         const runner = new events.EventEmitter();

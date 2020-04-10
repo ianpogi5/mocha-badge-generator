@@ -13,29 +13,30 @@ const makeFailingTest = () => {
 };
 
 const makeTest = (props) => {
-    const test = new Test('Just a test', function () {
-        this.timeout(5000);
+    return new Test('Just a test', function () {
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve();
             }, props.duration);
         });
-    });
-    return new Promise(function (resolve) {
-        test.run(() => {
-            resolve(test);
-        });
-    });
+    }).timeout(5000);
 };
 
 const makeSuite = async (testObjs) => {
-    const tests = await Promise.all(testObjs.map((testObj) => {
+    const tests = testObjs.map((testObj) => {
         return makeTest(testObj);
-    }));
+    });
     const suite = new Suite('Just a suite');
     tests.forEach((test) => {
         suite.addTest(test);
     });
+    await Promise.all(tests.map((test) => {
+        return new Promise(function(resolve) {
+            test.run(() => {
+                resolve();
+            });
+        });
+    }));
     return suite;
 };
 

@@ -98,6 +98,31 @@ describe('Binary', function () {
         assert.equal(result, expected);
     });
 
+    it(
+        'Builds badge from CLI with template and `slow` against mochawesome report',
+        async function () {
+            const {stdout, stderr} = await execFile(
+                binaryPath,
+                [
+                    '--slow', '2000',
+                    '--file',
+                    pathResolve(__dirname, 'fixtures', 'mochawesome.json'),
+                    '--badge_output',
+                    './test/results/badge-mochawesome.svg',
+                    '--badge_template',
+                    'Passes: ${passes}; failures: ${failures}; total: ${total}; ' +
+                    'duration: ${duration}; fast tests: ${speeds.fast}; ' +
+                    'medium tests: ${speeds.medium}; slow tests: ${speeds.slow}.'
+                ]
+            );
+            assert.equal(stdout, 'Saved to ./test/results/badge-mochawesome.svg\n');
+            assert.equal(stderr, '');
+            const expected = await readFile('test/fixtures/badge-mochawesome.svg', 'utf8');
+            const result = await readFile('test/results/badge-mochawesome.svg', 'utf8');
+            assert.equal(result, expected);
+        }
+    );
+
     it('Builds badge from CLI (glob)', async function () {
         const {stdout, stderr} = await execFile(
             binaryPath,

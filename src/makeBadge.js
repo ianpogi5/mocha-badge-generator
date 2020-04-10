@@ -76,10 +76,10 @@ exports.makeBadgeFromJSONFile = (options) => {
     //  inefficient to run a test with reporter to get at this info,
     //  especially with a simple algorithm.
     function baseReporterPassSpeedCalculation (obj, duration, tests) {
-        tests.forEach((test) => {
-            if (test.duration > slow) {
+        tests.forEach(({duration}) => {
+            if (duration > slow) {
               obj.speeds.slow++;
-            } else if (test.duration > slow / 2) {
+            } else if (duration > slow / 2) {
               obj.speeds.medium++;
             } else {
               obj.speeds.fast++;
@@ -95,14 +95,29 @@ exports.makeBadgeFromJSONFile = (options) => {
         const {
             passes, failures, duration, speeds
         } = options.file.reduce((obj, file) => {
+            const data = require(pathResolve(process.cwd(), file));
             const {
                 stats: {passes, failures, duration},
-                tests
-            } = require(pathResolve(process.cwd(), file));
+                tests,
+                results: mochawesomeTestResults
+            } = data;
             obj.passes += passes;
             obj.failures += failures;
             obj.duration += duration;
-            baseReporterPassSpeedCalculation(obj, duration, tests);
+            let testResults = tests;
+            if (!tests && mochawesomeTestResults) {
+                testResults = [];
+                const flattenResults = (results) => {
+                    results.forEach((result) => {
+                        result.tests.forEach((test) => {
+                            testResults.push(test);
+                        });
+                        flattenResults(result.suites);
+                    });
+                };
+                flattenResults(mochawesomeTestResults);
+            }
+            baseReporterPassSpeedCalculation(obj, duration, testResults);
             return obj;
         }, {passes: 0, failures: 0, duration: 0, speeds: {
             fast: 0,

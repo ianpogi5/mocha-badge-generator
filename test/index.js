@@ -231,7 +231,7 @@ describe('mocha badge reporter', function() {
         });
     });
 
-    it('should output png', async function() {
+    it('should output png (with env. variables)', async function() {
         process.env.MOCHA_BADGE_GEN_SUBJECT = 'PNG';
         process.env.MOCHA_BADGE_GEN_OK_COLOR = 'blue';
         process.env.MOCHA_BADGE_GEN_KO_COLOR = 'purple';
@@ -270,7 +270,7 @@ describe('mocha badge reporter', function() {
         });
     });
 
-    it('should output png', async function() {
+    it('should output png (with reporterOptions)', async function() {
         const reporterOptions = {
             badge_subject: 'PNG',
             badge_ok_color: 'blue',

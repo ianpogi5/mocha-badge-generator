@@ -1,5 +1,21 @@
 'use strict';
 
+const getChalkTemplateSingleEscape = (s) => {
+  return s.replace(/[{}\\]/gu, (ch) => {
+    return `\\u${ch.codePointAt().toString(16).padStart(4, '0')}`;
+  });
+};
+
+const getChalkTemplateEscape = (s) => {
+  return s.replace(/[{}\\]/gu, (ch) => {
+    return `\\\\u${ch.codePointAt().toString(16).padStart(4, '0')}`;
+  });
+};
+
+const getBracketedChalkTemplateEscape = (s) => {
+  return '{' + getChalkTemplateEscape(s) + '}';
+};
+
 const optionDefinitions = [
     // multiple: true, defaultOption: true
     {
@@ -14,6 +30,16 @@ const optionDefinitions = [
         typeLabel: '{underline glob}'
     },
     {
+        name: 'slow', type: Number,
+        description: 'Number of milliseconds that will be considered "slow" ' +
+            '(and per Mocha\'s algorithm, more than half of that will be ' +
+            'considered "medium"). Defaults to 75 ms per passing test ' +
+            '(as with Mocha). Mocha\'s JSON test results do not record ' +
+            'this info currently in reports, so test calls to `slow` cannot ' +
+            'be taken into account.',
+        typeLabel: '{underline ms}'
+    },
+    {
         name: 'badge_subject', type: String,
         description: 'The text that appears the left side of the badge. Defaults to `Tests`',
         typeLabel: '{underline subject}'
@@ -22,14 +48,36 @@ const optionDefinitions = [
         name: 'badge_ok_color', type: String,
         description: 'The color when all tests pass. Colors may be a ' +
             '6-digit hex code (without the `#`) or a named CSS color. ' +
-            'Defaults to 44cc11 (brightgreen).',
-        typeLabel: '{underline 6-digit-hex OR named CSS color}'
+            'Defaults to 44cc11 (brightgreen).' +
+            getChalkTemplateSingleEscape(
+                'May follow with comma and `s{ffffff}` to add a different ' +
+                'stroke color.'
+            ),
+        typeLabel: getBracketedChalkTemplateEscape(
+            'underline CSS-Color|Hex as: ffffff|Hex stroke as s{ffffff}'
+        )
     },
     {
         name: 'badge_ko_color', type: String,
         description: 'The color when at least 1 test fails. See ' +
-            '`badge_ok_color` for possible colors. Defaults to e05d44 (red)',
-        typeLabel: '{underline 6-digit-hex OR named CSS color}'
+            '`badge_ok_color` for possible colors. Defaults to e05d44 (red).' +
+            getChalkTemplateSingleEscape(
+                'May follow with comma and `s{ffffff}` to add a different ' +
+                'stroke color.'
+            ),
+        typeLabel: getBracketedChalkTemplateEscape(
+            'underline CSS-Color|Hex as: ffffff|Hex stroke as s{ffffff}'
+        )
+    },
+    {
+        name: 'badge_template', type: String,
+        description: 'ES6 template for formatting the results; will be passed ' +
+            '`passes`, `failures`, `total`, `duration`, `speeds` (with ' +
+            '`fast`, `medium`, and `slow` property counts). ' +
+            getChalkTemplateSingleEscape(
+                'Defaults to "${passes}/${total}".'
+            ),
+        typeLabel: '{underline es6 template string}'
     },
     {
         name: 'badge_output', type: String,

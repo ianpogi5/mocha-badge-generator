@@ -1,8 +1,44 @@
 const events = require('events');
 const fs = require('fs');
 const {assert} = require('chai');
+const Suite = require('mocha/lib/suite');
+const Test = require('mocha/lib/test');
 
-const badgeGenerator = require('../');
+const BadgeGenerator = require('../');
+
+const makeFailingTest = () => {
+    return new Test('Just a failing test', function () {
+        throw new Error('failed');
+    });
+};
+
+const makeTest = (props) => {
+    return new Test('Just a test', function () {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve();
+            }, props.duration);
+        });
+    }).timeout(5000);
+};
+
+const makeSuite = async (testObjs) => {
+    const tests = testObjs.map((testObj) => {
+        return makeTest(testObj);
+    });
+    const suite = new Suite('Just a suite');
+    tests.forEach((test) => {
+        suite.addTest(test);
+    });
+    await Promise.all(tests.map((test) => {
+        return new Promise(function(resolve) {
+            test.run(() => {
+                resolve();
+            });
+        });
+    }));
+    return suite;
+};
 
 const BADGE = './test/badge.svg';
 const BADGE_FAILED = './test/failed.svg';
@@ -19,74 +55,91 @@ try {
 }
 
 describe('mocha badge reporter', function() {
-    it('should register test failed 3/4', function(done) {
+    this.timeout(10000);
+    it('should register test failed 3/4', async function() {
         const runner = new events.EventEmitter();
-        badgeGenerator(runner)
-            .then(() => {
-                const actual = fs.readFileSync(BADGE, 'utf8');
-                const expected = fs.readFileSync(BADGE_FAILED, 'utf8');
-                assert.equal(actual, expected);
-                fs.unlink(BADGE, function() {
-                    done();
+        const suite = await makeSuite([
+            {duration: 10},
+            {duration: 2000},
+            {duration: 1000}
+        ]);
+        return new Promise(function(resolve, reject) {
+            new BadgeGenerator(runner)
+                .then(() => {
+                    const actual = fs.readFileSync(BADGE, 'utf8');
+                    const expected = fs.readFileSync(BADGE_FAILED, 'utf8');
+                    assert.equal(actual, expected);
+                    fs.unlink(BADGE, function() {
+                        resolve();
+                    });
+                })
+                .catch(err => {
+                    reject(err);
                 });
-            })
-            .catch(err => {
-                console.log(err);
-                assert.ok(false);
-                done();
+            suite.tests.forEach((test) => {
+                runner.emit('pass', test);
             });
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('fail');
-        runner.emit('end');
+            runner.emit('fail', makeFailingTest());
+            runner.emit('end');
+        });
     });
 
-    it('should register test passed 4/4', function(done) {
+    it('should register test passed 4/4', async function() {
         const runner = new events.EventEmitter();
-        badgeGenerator(runner)
-            .then(() => {
-                const actual = fs.readFileSync(BADGE, 'utf8');
-                const expected = fs.readFileSync(BADGE_PASSED, 'utf8');
-                assert.equal(actual, expected);
-                fs.unlink(BADGE, function() {
-                    done();
+        const suite = await makeSuite([
+            {duration: 10},
+            {duration: 2000},
+            {duration: 1000},
+            {duration: 500}
+        ]);
+        return new Promise(function(resolve, reject) {
+            new BadgeGenerator(runner)
+                .then(() => {
+                    const actual = fs.readFileSync(BADGE, 'utf8');
+                    const expected = fs.readFileSync(BADGE_PASSED, 'utf8');
+                    assert.equal(actual, expected);
+                    fs.unlink(BADGE, function() {
+                        resolve();
+                    });
+                })
+                .catch(err => {
+                    reject(err);
                 });
-            })
-            .catch(err => {
-                console.log(err);
-                assert.ok(false);
-                done();
-            });
 
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('end');
+            suite.tests.forEach((test) => {
+                runner.emit('pass', test);
+            });
+            runner.emit('end');
+        });
     });
 
-    it('should throw a write error', function(done) {
+    it('should throw a write error', async function() {
         process.env.MOCHA_BADGE_GEN_OUTPUT = '/invalid/path/badge.svg';
         const runner = new events.EventEmitter();
-        badgeGenerator(runner)
-            .then(() => {
-                assert.ok(false);
-                done();
-            })
-            .catch(() => {
-                assert.ok(true);
-                done();
+        const suite = await makeSuite([
+            {duration: 1000}
+        ]);
+        return new Promise(function(resolve, reject) {
+            new BadgeGenerator(runner)
+                .then(() => {
+                    reject(new Error("Shouldn't pass"));
+                })
+                .catch(() => {
+                    assert.ok(true);
+                    resolve();
+                });
+
+            suite.tests.forEach((test) => {
+                runner.emit('pass', test);
             });
+            runner.emit('end');
 
-        runner.emit('pass');
-        runner.emit('end');
-
-        // restore default
-        process.env.MOCHA_BADGE_GEN_OUTPUT = './test/badge.svg';
+            // restore default
+            process.env.MOCHA_BADGE_GEN_OUTPUT = './test/badge.svg';
+        });
     });
 
-    it('should output png', function(done) {
+    it('should output png', async function() {
         process.env.MOCHA_BADGE_GEN_SUBJECT = 'PNG';
         process.env.MOCHA_BADGE_GEN_OK_COLOR = 'blue';
         process.env.MOCHA_BADGE_GEN_KO_COLOR = 'purple';
@@ -94,35 +147,38 @@ describe('mocha badge reporter', function() {
         process.env.MOCHA_BADGE_GEN_OUTPUT = './test/badge.png';
 
         const runner = new events.EventEmitter();
-        badgeGenerator(runner)
-            .then(() => {
-                assert.isTrue(fs.existsSync(BADGE_PNG));
-                fs.unlink(BADGE_PNG, function() {
-                    done();
+        const suite = await makeSuite([
+            {duration: 10},
+            {duration: 2000},
+            {duration: 1000},
+            {duration: 500}
+        ]);
+        return new Promise(function(resolve, reject) {
+            new BadgeGenerator(runner)
+                .then(() => {
+                    assert.isTrue(fs.existsSync(BADGE_PNG));
+                    fs.unlink(BADGE_PNG, function() {
+                        resolve();
+                    });
+                })
+                .catch(err => {
+                    reject(err);
                 });
-            })
-            .catch(err => {
-                console.log(err);
-                assert.ok(false);
-                done();
+            suite.tests.forEach((test) => {
+                runner.emit('pass', test);
             });
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('end');
+            runner.emit('end');
 
-        // restore default
-        process.env.MOCHA_BADGE_GEN_SUBJECT = 'Tests';
-        process.env.MOCHA_BADGE_GEN_OK_COLOR = '44cc11';
-        process.env.MOCHA_BADGE_GEN_KO_COLOR = 'e05d44';
-        process.env.MOCHA_BADGE_GEN_FORMAT = 'svg';
-        process.env.MOCHA_BADGE_GEN_OUTPUT = './test/badge.svg';
+            // restore default
+            process.env.MOCHA_BADGE_GEN_SUBJECT = 'Tests';
+            process.env.MOCHA_BADGE_GEN_OK_COLOR = '44cc11';
+            process.env.MOCHA_BADGE_GEN_KO_COLOR = 'e05d44';
+            process.env.MOCHA_BADGE_GEN_FORMAT = 'svg';
+            process.env.MOCHA_BADGE_GEN_OUTPUT = './test/badge.svg';
+        });
+    });
 
-        // sync2png takes a bit of time
-    }).timeout(10000);
-
-    it('should output png', function(done) {
+    it('should output png', async function() {
         const reporterOptions = {
             badge_subject: 'PNG',
             badge_ok_color: 'blue',
@@ -132,34 +188,42 @@ describe('mocha badge reporter', function() {
         };
 
         const runner = new events.EventEmitter();
-        badgeGenerator(runner, {reporterOptions})
-            .then(() => {
-                assert.isTrue(fs.existsSync(BADGE_PNG_BY_OPTIONS));
-                fs.unlink(BADGE_PNG_BY_OPTIONS, function() {
-                    done();
+        const suite = await makeSuite([
+            {duration: 10},
+            {duration: 2000},
+            {duration: 1000},
+            {duration: 500}
+        ]);
+        return new Promise(function(resolve, reject) {
+            new BadgeGenerator(runner, {reporterOptions})
+                .then(() => {
+                    assert.isTrue(fs.existsSync(BADGE_PNG_BY_OPTIONS));
+                    fs.unlink(BADGE_PNG_BY_OPTIONS, function() {
+                        resolve();
+                    });
+                })
+                .catch(err => {
+                    reject(err);
                 });
-            })
-            .catch(err => {
-                console.log(err);
-                assert.ok(false);
-                done();
+            suite.tests.forEach((test) => {
+                runner.emit('pass', test);
             });
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('end');
+            runner.emit('end');
+        });
+    });
 
-        // sync2png takes a bit of time
-    }).timeout(10000);
-
-    after(() => {
+    after(async () => {
         const runner = new events.EventEmitter();
-        badgeGenerator(runner);
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('pass');
-        runner.emit('pass');
+        new BadgeGenerator(runner);
+        const suite = await makeSuite([
+            {duration: 10},
+            {duration: 2000},
+            {duration: 1000},
+            {duration: 500}
+        ]);
+        suite.tests.forEach((test) => {
+            runner.emit('pass', test);
+        });
         runner.emit('end');
     });
 });

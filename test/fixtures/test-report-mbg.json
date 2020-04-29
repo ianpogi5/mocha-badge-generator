@@ -1,0 +1,157 @@
+{
+  "stats": {
+    "suites": 3,
+    "tests": 9,
+    "passes": 8,
+    "pending": 0,
+    "failures": 1,
+    "start": "2020-04-10T03:25:35.021Z",
+    "end": "2020-04-10T03:25:39.927Z",
+    "duration": 4906
+  },
+  "tests": [
+    {
+      "title": "Outputs version",
+      "fullTitle": "Binary Outputs version",
+      "duration": 560,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI",
+      "fullTitle": "Binary Builds badge from CLI",
+      "duration": 588,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI (glob)",
+      "fullTitle": "Binary Builds badge from CLI (glob)",
+      "duration": 543,
+      "currentRetry": 0,
+      "err": {
+        "message": "expected '' to equal 'Saved to ./test/results/badge2.svg\\n'",
+        "showDiff": true,
+        "actual": "",
+        "expected": "Saved to ./test/results/badge2.svg\n",
+        "stack": "AssertionError: expected '' to equal 'Saved to ./test/results/badge2.svg\\n'\n    at Context.<anonymous> (test/bin.js:44:16)"
+      }
+    },
+    {
+      "title": "should register test failed 3/4",
+      "fullTitle": "mocha badge reporter should register test failed 3/4",
+      "duration": 50,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should register test passed 4/4",
+      "fullTitle": "mocha badge reporter should register test passed 4/4",
+      "duration": 8,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should throw a write error",
+      "fullTitle": "mocha badge reporter should throw a write error",
+      "duration": 9,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should output png",
+      "fullTitle": "mocha badge reporter should output png",
+      "duration": 2185,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should output png",
+      "fullTitle": "mocha badge reporter should output png",
+      "duration": 940,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "`makeBadgeFromJSONFile` should throw without `file`",
+      "fullTitle": "`makeBadgeFromJSONFile` `makeBadgeFromJSONFile` should throw without `file`",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ],
+  "pending": [],
+  "failures": [
+    {
+      "title": "Builds badge from CLI (glob)",
+      "fullTitle": "Binary Builds badge from CLI (glob)",
+      "duration": 543,
+      "currentRetry": 0,
+      "err": {
+        "message": "expected '' to equal 'Saved to ./test/results/badge2.svg\\n'",
+        "showDiff": true,
+        "actual": "",
+        "expected": "Saved to ./test/results/badge2.svg\n",
+        "stack": "AssertionError: expected '' to equal 'Saved to ./test/results/badge2.svg\\n'\n    at Context.<anonymous> (test/bin.js:44:16)"
+      }
+    }
+  ],
+  "passes": [
+    {
+      "title": "Outputs version",
+      "fullTitle": "Binary Outputs version",
+      "duration": 560,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI",
+      "fullTitle": "Binary Builds badge from CLI",
+      "duration": 588,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should register test failed 3/4",
+      "fullTitle": "mocha badge reporter should register test failed 3/4",
+      "duration": 50,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should register test passed 4/4",
+      "fullTitle": "mocha badge reporter should register test passed 4/4",
+      "duration": 8,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should throw a write error",
+      "fullTitle": "mocha badge reporter should throw a write error",
+      "duration": 9,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should output png",
+      "fullTitle": "mocha badge reporter should output png",
+      "duration": 2185,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "should output png",
+      "fullTitle": "mocha badge reporter should output png",
+      "duration": 940,
+      "currentRetry": 0,
+      "err": {}
+    },
+    {
+      "title": "`makeBadgeFromJSONFile` should throw without `file`",
+      "fullTitle": "`makeBadgeFromJSONFile` `makeBadgeFromJSONFile` should throw without `file`",
+      "duration": 2,
+      "currentRetry": 0,
+      "err": {}
+    }
+  ]
+}

@@ -8,9 +8,10 @@
         "mocha-badge-generator": "./bin/mbg.js"
     },
     "scripts": {
-        "build-cli-svg": "clp --config=bin/optionDefinitions.js cli.svg",
+        "build-cli": "clp --config=bin/optionDefinitions.js cli.svg",
         "bin": "./bin/mbg.js",
         "lint": "eslint .",
+        "json-test-report": "mocha --reporter json test > test/fixtures/test-report-mbg.json",
         "test": "nyc --all --reporter=text mocha",
         "test-watch": "mocha -w",
         "cov": "nyc --all --reporter=text npm test",
@@ -54,6 +55,7 @@
     "devDependencies": {
         "chai": "^4.2.0",
         "command-line-publish": "^0.7.0",
+        "es6-template-strings": "^2.0.1",
         "eslint": "^6.8.0",
         "mocha": "^7.1.2",
         "nyc": "^15.0.1",

@@ -43,6 +43,9 @@ You can change the output by defining Mocha `--reporter-options` or environment 
 | badge_output | MOCHA_BADGE_GEN_OUTPUT | ./test/badge.svg | Path of the output file. |
 | badge_format | MOCHA_BADGE_GEN_FORMAT | svg | Output file format. Possible values are "svg" and "png". However, please note that for format "png", while versions <= 0.3.0 bundled `svg2png`, you must now add `svg2png` yourself (e.g., to your `dependencies` or `devDependencies`).  |
 | badge_template | MOCHA_BADGE_GEN_TEMPLATE | `"${passes}/${total}"` | ES6 template for formatting the results; will be passed `passes`, `failures`, `total`, `duration`, `speeds` (with `fast`, `medium`, and `slow` property counts). |
+| badge_threshold | MOCHA_BADGE_GEN_THRESHOLD | 0 |  Number of acceptable failures (such that if exceeded, `badge_ko_color` will be used in place of `badge_ok_color`). |
+| badge_slow_threshold | MOCHA_BADGE_GEN_SLOW_THRESHOLD | N/A | Indicates a maximum number of slow tests beyond which the tests will be considered a failure (such that if the amount is exceeded, `badge_ko_color` will be used in place of `badge_ok_color`). No default as only checked if present. |
+| badge_duration_threshold | MOCHA_BADGE_GEN_DURATION_THRESHOLD | N/A | Indicates a maximum duration in milliseconds beyond which the tests will be considered a failure (such that if the duration is exceeded, `badge_ko_color` will be used in place of `badge_ok_color`). No default as only checked if present. |
 
 Sample config for changing output to PNG.
 
@@ -100,7 +103,10 @@ makeBadge({
         badge_ok_color,
         badge_output,
         badge_format,
-        badge_template
+        badge_template,
+        badge_threshold,
+        badge_slow_threshold,
+        badge_duration_threshold
     }
 });
 ```
@@ -131,7 +137,10 @@ makeBadgeFromJSONFile({
     badge_ok_color,
     badge_output,
     badge_format,
-    badge_template
+    badge_template,
+    badge_threshold,
+    badge_slow_threshold,
+    badge_duration_threshold
 });
 ```
 

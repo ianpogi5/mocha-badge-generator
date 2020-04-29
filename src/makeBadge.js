@@ -12,7 +12,8 @@ async function makeBadge ({
 }) {
     const {
         badge_subject, badge_ok_color, badge_ko_color,
-        badge_format, badge_output, badge_template
+        badge_format, badge_output, badge_template,
+        badge_threshold, badge_slow_threshold, badge_duration_threshold
     } = options || {};
     const subject = badge_subject ||
         process.env.MOCHA_BADGE_GEN_SUBJECT || 'Tests';
@@ -26,8 +27,18 @@ async function makeBadge ({
         process.env.MOCHA_BADGE_GEN_FORMAT || 'svg';
     const textTemplate = badge_template ||
         process.env.MOCHA_BADGE_GEN_TEMPLATE || '${passes}/${total}';
+    const failureThreshold = badge_threshold ||
+        process.env.MOCHA_BADGE_GEN_THRESHOLD || 0;
+    const slowThreshold = badge_slow_threshold ||
+        process.env.MOCHA_BADGE_GEN_SLOW_THRESHOLD;
+    const durationThreshold = badge_duration_threshold ||
+        process.env.MOCHA_BADGE_GEN_DURATION_THRESHOLD;
 
-    const color = failures > 0 ? koColor : okColor;
+    const color = failures > failureThreshold ||
+        (durationThreshold && duration > durationThreshold) ||
+        (slowThreshold && speeds.slow > slowThreshold)
+        ? koColor
+        : okColor;
     const total = passes + failures;
 
     // Could use `badge.v2.sectionsToData` for more control; see `test`

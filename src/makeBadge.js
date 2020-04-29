@@ -2,6 +2,8 @@ const fs = require('fs');
 const {resolve: pathResolve} = require('path');
 const badge = require('badge-up').v2;
 
+const fastGlob = require('fast-glob');
+
 async function makeBadge ({passes, failures, options}) {
     const {
         badge_subject, badge_ok_color, badge_ko_color,
@@ -45,13 +47,28 @@ async function makeBadge ({passes, failures, options}) {
 }
 
 exports.makeBadgeFromJSONFile = (options) => {
-    if (!options.file) {
-        throw new TypeError('You must supply a `file` to `makeBadgeFromJSONFile`');
+    if (
+        (!options.fileGlob || !options.fileGlob.length) &&
+        (!options.file || !options.file.length)
+    ) {
+        throw new TypeError('You must supply a `file` (or `fileGlob`) to `makeBadgeFromJSONFile`');
     }
-    const {
-        stats: {passes, failures}
-    } = require(pathResolve(process.cwd(), options.file));
-    return makeBadge({passes, failures, options});
+    // Throw early above
+    return (async () => {
+        if (options.fileGlob && options.fileGlob.length) {
+            options.file = options.file || [];
+            options.file.push(...await fastGlob(options.fileGlob));
+        }
+        const {passes, failures} = options.file.reduce((obj, file) => {
+            const {
+                stats: {passes, failures}
+            } = require(pathResolve(process.cwd(), file));
+            obj.passes += passes;
+            obj.failures += failures;
+            return obj;
+        }, {passes: 0, failures: 0});
+        return makeBadge({passes, failures, options});
+    })();
 };
 
 exports.makeBadge = makeBadge;

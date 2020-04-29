@@ -3,10 +3,15 @@
 const optionDefinitions = [
     // multiple: true, defaultOption: true
     {
-        name: 'file', type: String,
+        name: 'file', type: String, multiple: true,
         description: 'The JSON file from which to obtain the ' +
         'passes/fails (on a `stats` property)',
         typeLabel: '{underline file}'
+    },
+    {
+        name: 'fileGlob', type: String, multiple: true,
+        description: 'Points to JSON files in format of `file` but as globs',
+        typeLabel: '{underline glob}'
     },
     {
         name: 'badge_subject', type: String,

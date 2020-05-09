@@ -115,7 +115,7 @@ exports.makeBadgeFromJSONFile = (options) => {
             obj.passes += passes;
             obj.failures += failures;
             obj.duration += duration;
-            let testResults = tests;
+            let testResults = tests || [];
             if (!tests && mochawesomeTestResults) {
                 testResults = [];
                 const flattenResults = (results) => {

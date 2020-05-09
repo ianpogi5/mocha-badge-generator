@@ -66,7 +66,7 @@ describe('mocha badge reporter', function() {
             {duration: 1000}
         ]);
         return new Promise(function(resolve, reject) {
-            new BadgeGenerator(runner)
+            new BadgeGenerator(runner).promise
                 .then(() => {
                     const actual = fs.readFileSync(BADGE, 'utf8');
                     const expected = fs.readFileSync(BADGE_FAILED, 'utf8');
@@ -86,6 +86,34 @@ describe('mocha badge reporter', function() {
         });
     });
 
+    it('should register test failed 3/4 with `done` invoked', async function() {
+        this.timeout(40000);
+        const runner = new events.EventEmitter();
+        const suite = await makeSuite([
+            {duration: 10},
+            {duration: 2000},
+            {duration: 1000}
+        ]);
+        return new Promise(function(resolve /* , reject */) {
+            const bg = new BadgeGenerator(runner);
+            bg.done(100, function (failures) {
+                assert.equal(failures, 100, 'Returns value passed in');
+
+                const actual = fs.readFileSync(BADGE, 'utf8');
+                const expected = fs.readFileSync(BADGE_FAILED, 'utf8');
+                assert.equal(actual, expected);
+                fs.unlink(BADGE, function() {
+                    resolve();
+                });
+            });
+            suite.tests.forEach((test) => {
+                runner.emit('pass', test);
+            });
+            runner.emit('fail', makeFailingTest());
+            runner.emit('end');
+        });
+    });
+
     it('should register test failed 3/4 but use passing color if higher threshold set', async function() {
         const runner = new events.EventEmitter();
         const suite = await makeSuite([
@@ -94,7 +122,7 @@ describe('mocha badge reporter', function() {
             {duration: 1000}
         ]);
         return new Promise(function(resolve, reject) {
-            new BadgeGenerator(runner, {reporterOptions: {badge_threshold: 1}})
+            new BadgeGenerator(runner, {reporterOptions: {badge_threshold: 1}}).promise
                 .then(() => {
                     const actual = fs.readFileSync(BADGE, 'utf8');
                     const expected = fs.readFileSync(BADGE_FAILED_BUT_OK_THRESHOLD, 'utf8');
@@ -123,7 +151,7 @@ describe('mocha badge reporter', function() {
             {duration: 500}
         ]);
         return new Promise(function(resolve, reject) {
-            new BadgeGenerator(runner)
+            new BadgeGenerator(runner).promise
                 .then(() => {
                     const actual = fs.readFileSync(BADGE, 'utf8');
                     const expected = fs.readFileSync(BADGE_PASSED, 'utf8');
@@ -154,7 +182,7 @@ describe('mocha badge reporter', function() {
         return new Promise(function(resolve, reject) {
             new BadgeGenerator(runner, {reporterOptions: {
                 badge_duration_threshold: 3000
-            }})
+            }}).promise
                 .then(() => {
                     const actual = fs.readFileSync(BADGE, 'utf8');
                     const expected = fs.readFileSync(BADGE_PASSES_BUT_BAD_DURATION, 'utf8');
@@ -185,7 +213,7 @@ describe('mocha badge reporter', function() {
         return new Promise(function(resolve, reject) {
             new BadgeGenerator(runner, {reporterOptions: {
                 badge_slow_threshold: 1
-            }})
+            }}).promise
                 .then(() => {
                     const actual = fs.readFileSync(BADGE, 'utf8');
                     const expected = fs.readFileSync(BADGE_PASSES_BUT_BAD_DURATION, 'utf8');
@@ -206,28 +234,26 @@ describe('mocha badge reporter', function() {
     });
 
     it('should throw a write error', async function() {
+        this.timeout(40000);
         process.env.MOCHA_BADGE_GEN_OUTPUT = '/invalid/path/badge.svg';
         const runner = new events.EventEmitter();
         const suite = await makeSuite([
             {duration: 1000}
         ]);
-        return new Promise(function(resolve, reject) {
-            new BadgeGenerator(runner)
-                .then(() => {
-                    reject(new Error("Shouldn't pass"));
-                })
-                .catch(() => {
-                    assert.ok(true);
-                    resolve();
-                });
-
+        return new Promise(function(resolve /* , reject */) {
+            const bg = new BadgeGenerator(runner);
+            bg.done(100, function (/* failures */) {
+                assert.ok(false);
+            });
             suite.tests.forEach((test) => {
                 runner.emit('pass', test);
             });
             runner.emit('end');
-
-            // restore default
-            process.env.MOCHA_BADGE_GEN_OUTPUT = './test/badge.svg';
+            bg.promise.catch(() => {
+                // restore default
+                process.env.MOCHA_BADGE_GEN_OUTPUT = './test/badge.svg';
+                resolve();
+            });
         });
     });
 
@@ -246,7 +272,7 @@ describe('mocha badge reporter', function() {
             {duration: 500}
         ]);
         return new Promise(function(resolve, reject) {
-            new BadgeGenerator(runner)
+            new BadgeGenerator(runner).promise
                 .then(() => {
                     assert.isTrue(fs.existsSync(BADGE_PNG));
                     fs.unlink(BADGE_PNG, function() {
@@ -287,7 +313,7 @@ describe('mocha badge reporter', function() {
             {duration: 500}
         ]);
         return new Promise(function(resolve, reject) {
-            new BadgeGenerator(runner, {reporterOptions})
+            new BadgeGenerator(runner, {reporterOptions}).promise
                 .then(() => {
                     assert.isTrue(fs.existsSync(BADGE_PNG_BY_OPTIONS));
                     fs.unlink(BADGE_PNG_BY_OPTIONS, function() {

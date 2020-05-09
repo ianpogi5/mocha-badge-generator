@@ -6,7 +6,7 @@ const {makeBadge} = require('./makeBadge.js');
 function BadgeGenerator(runner, options) {
     // We need the base for its calculation of `test.speed`
     Base.call(this, runner, options);
-    return new Promise((resolve, reject) => {
+    this.promise = new Promise((resolve, reject) => {
         let passes = 0;
         let failures = 0;
 
@@ -38,6 +38,14 @@ function BadgeGenerator(runner, options) {
         });
     });
 }
+
+BadgeGenerator.prototype.done = function done (failures, fn) {
+    this.promise.then(() => {
+        fn(failures);
+    }).catch((err) => {
+        console.error(err);
+    });
+};
 
 module.exports = BadgeGenerator;
 

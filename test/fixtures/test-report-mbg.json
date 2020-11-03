@@ -1,82 +1,171 @@
 {
   "stats": {
     "suites": 3,
-    "tests": 9,
-    "passes": 8,
+    "tests": 17,
+    "passes": 16,
     "pending": 0,
     "failures": 1,
-    "start": "2020-04-10T03:25:35.021Z",
-    "end": "2020-04-10T03:25:39.927Z",
-    "duration": 4906
+    "start": "2020-11-03T01:37:30.664Z",
+    "end": "2020-11-03T01:37:56.018Z",
+    "duration": 25354
   },
   "tests": [
     {
       "title": "Outputs version",
       "fullTitle": "Binary Outputs version",
-      "duration": 560,
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 610,
       "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
       "title": "Builds badge from CLI",
       "fullTitle": "Binary Builds badge from CLI",
-      "duration": 588,
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 456,
       "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI with color and stroke color",
+      "fullTitle": "Binary Builds badge from CLI with color and stroke color",
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 461,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI with template",
+      "fullTitle": "Binary Builds badge from CLI with template",
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 572,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI with template and `slow`",
+      "fullTitle": "Binary Builds badge from CLI with template and `slow`",
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 429,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI with template and `slow` against mochawesome report",
+      "fullTitle": "Binary Builds badge from CLI with template and `slow` against mochawesome report",
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 476,
+      "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
       "title": "Builds badge from CLI (glob)",
       "fullTitle": "Binary Builds badge from CLI (glob)",
-      "duration": 543,
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 518,
       "currentRetry": 0,
       "err": {
-        "message": "expected '' to equal 'Saved to ./test/results/badge2.svg\\n'",
+        "message": "expected '' to equal 'Saved to ./test/results/badge-glob.svg\\n'",
         "showDiff": true,
         "actual": "",
-        "expected": "Saved to ./test/results/badge2.svg\n",
-        "stack": "AssertionError: expected '' to equal 'Saved to ./test/results/badge2.svg\\n'\n    at Context.<anonymous> (test/bin.js:44:16)"
+        "expected": "Saved to ./test/results/badge-glob.svg\n",
+        "stack": "AssertionError: expected '' to equal 'Saved to ./test/results/badge-glob.svg\\n'\n    at Context.<anonymous> (test/bin.js:138:16)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
       }
     },
     {
       "title": "should register test failed 3/4",
       "fullTitle": "mocha badge reporter should register test failed 3/4",
-      "duration": 50,
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2047,
       "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "should register test failed 3/4 with `done` invoked",
+      "fullTitle": "mocha badge reporter should register test failed 3/4 with `done` invoked",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2016,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "should register test failed 3/4 but use passing color if higher threshold set",
+      "fullTitle": "mocha badge reporter should register test failed 3/4 but use passing color if higher threshold set",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2021,
+      "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
       "title": "should register test passed 4/4",
       "fullTitle": "mocha badge reporter should register test passed 4/4",
-      "duration": 8,
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2021,
       "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "should register test passed 4/4 but indicate as failure due to failing duration threshold",
+      "fullTitle": "mocha badge reporter should register test passed 4/4 but indicate as failure due to failing duration threshold",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2022,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "should register test passed 4/4 but indicate as failure due to failing slow threshold",
+      "fullTitle": "mocha badge reporter should register test passed 4/4 but indicate as failure due to failing slow threshold",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2022,
+      "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
       "title": "should throw a write error",
       "fullTitle": "mocha badge reporter should throw a write error",
-      "duration": 9,
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 1019,
       "currentRetry": 0,
+      "speed": "medium",
       "err": {}
     },
     {
-      "title": "should output png",
-      "fullTitle": "mocha badge reporter should output png",
-      "duration": 2185,
+      "title": "should output png (with env. variables)",
+      "fullTitle": "mocha badge reporter should output png (with env. variables)",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 3293,
       "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
-      "title": "should output png",
-      "fullTitle": "mocha badge reporter should output png",
-      "duration": 940,
+      "title": "should output png (with reporterOptions)",
+      "fullTitle": "mocha badge reporter should output png (with reporterOptions)",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 3338,
       "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
       "title": "`makeBadgeFromJSONFile` should throw without `file`",
       "fullTitle": "`makeBadgeFromJSONFile` `makeBadgeFromJSONFile` should throw without `file`",
+      "file": "/Users/brett/mocha-badge-generator/test/makeBadgeFromJSONFile.js",
       "duration": 2,
       "currentRetry": 0,
+      "speed": "fast",
       "err": {}
     }
   ],
@@ -85,14 +174,15 @@
     {
       "title": "Builds badge from CLI (glob)",
       "fullTitle": "Binary Builds badge from CLI (glob)",
-      "duration": 543,
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 518,
       "currentRetry": 0,
       "err": {
-        "message": "expected '' to equal 'Saved to ./test/results/badge2.svg\\n'",
+        "message": "expected '' to equal 'Saved to ./test/results/badge-glob.svg\\n'",
         "showDiff": true,
         "actual": "",
-        "expected": "Saved to ./test/results/badge2.svg\n",
-        "stack": "AssertionError: expected '' to equal 'Saved to ./test/results/badge2.svg\\n'\n    at Context.<anonymous> (test/bin.js:44:16)"
+        "expected": "Saved to ./test/results/badge-glob.svg\n",
+        "stack": "AssertionError: expected '' to equal 'Saved to ./test/results/badge-glob.svg\\n'\n    at Context.<anonymous> (test/bin.js:138:16)\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)"
       }
     }
   ],
@@ -100,57 +190,145 @@
     {
       "title": "Outputs version",
       "fullTitle": "Binary Outputs version",
-      "duration": 560,
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 610,
       "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
       "title": "Builds badge from CLI",
       "fullTitle": "Binary Builds badge from CLI",
-      "duration": 588,
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 456,
       "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI with color and stroke color",
+      "fullTitle": "Binary Builds badge from CLI with color and stroke color",
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 461,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI with template",
+      "fullTitle": "Binary Builds badge from CLI with template",
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 572,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI with template and `slow`",
+      "fullTitle": "Binary Builds badge from CLI with template and `slow`",
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 429,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "Builds badge from CLI with template and `slow` against mochawesome report",
+      "fullTitle": "Binary Builds badge from CLI with template and `slow` against mochawesome report",
+      "file": "/Users/brett/mocha-badge-generator/test/bin.js",
+      "duration": 476,
+      "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
       "title": "should register test failed 3/4",
       "fullTitle": "mocha badge reporter should register test failed 3/4",
-      "duration": 50,
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2047,
       "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "should register test failed 3/4 with `done` invoked",
+      "fullTitle": "mocha badge reporter should register test failed 3/4 with `done` invoked",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2016,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "should register test failed 3/4 but use passing color if higher threshold set",
+      "fullTitle": "mocha badge reporter should register test failed 3/4 but use passing color if higher threshold set",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2021,
+      "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
       "title": "should register test passed 4/4",
       "fullTitle": "mocha badge reporter should register test passed 4/4",
-      "duration": 8,
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2021,
       "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "should register test passed 4/4 but indicate as failure due to failing duration threshold",
+      "fullTitle": "mocha badge reporter should register test passed 4/4 but indicate as failure due to failing duration threshold",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2022,
+      "currentRetry": 0,
+      "speed": "slow",
+      "err": {}
+    },
+    {
+      "title": "should register test passed 4/4 but indicate as failure due to failing slow threshold",
+      "fullTitle": "mocha badge reporter should register test passed 4/4 but indicate as failure due to failing slow threshold",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 2022,
+      "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
       "title": "should throw a write error",
       "fullTitle": "mocha badge reporter should throw a write error",
-      "duration": 9,
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 1019,
       "currentRetry": 0,
+      "speed": "medium",
       "err": {}
     },
     {
-      "title": "should output png",
-      "fullTitle": "mocha badge reporter should output png",
-      "duration": 2185,
+      "title": "should output png (with env. variables)",
+      "fullTitle": "mocha badge reporter should output png (with env. variables)",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 3293,
       "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
-      "title": "should output png",
-      "fullTitle": "mocha badge reporter should output png",
-      "duration": 940,
+      "title": "should output png (with reporterOptions)",
+      "fullTitle": "mocha badge reporter should output png (with reporterOptions)",
+      "file": "/Users/brett/mocha-badge-generator/test/index.js",
+      "duration": 3338,
       "currentRetry": 0,
+      "speed": "slow",
       "err": {}
     },
     {
       "title": "`makeBadgeFromJSONFile` should throw without `file`",
       "fullTitle": "`makeBadgeFromJSONFile` `makeBadgeFromJSONFile` should throw without `file`",
+      "file": "/Users/brett/mocha-badge-generator/test/makeBadgeFromJSONFile.js",
       "duration": 2,
       "currentRetry": 0,
+      "speed": "fast",
       "err": {}
     }
   ]

@@ -89,9 +89,24 @@ exports.makeBadgeFromJSONFile = (options) => {
     //  inefficient to run a test with reporter to get at this info,
     //  especially with a simple algorithm.
     function baseReporterPassSpeedCalculation (obj, duration, tests) {
-        tests.forEach(({duration}) => {
+        tests.forEach(({speed, duration, err}) => {
+            // Mocha 8.2.0+ (should take into account `this.slow()` and
+            //  any changed `slow` value)
+            if (speed !== undefined) {
+                obj.speeds[speed]++;
+                return;
+            }
+
+            // istanbul ignore else -- Test. env is Mocha >= 8.2.0
+            if (Object.keys(err).length) {
+                return;
+            }
+
+            // Mocha < 8.2.0
+            // istanbul ignore next -- Test. env is Mocha >= 8.2.0
             if (duration > slow) {
               obj.speeds.slow++;
+            // istanbul ignore next -- Test. env is Mocha >= 8.2.0
             } else if (duration > slow / 2) {
               obj.speeds.medium++;
             } else {

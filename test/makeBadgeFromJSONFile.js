@@ -1,3 +1,5 @@
+'use strict';
+
 const {assert} = require('chai');
 
 const {makeBadgeFromJSONFile} = require('../src/makeBadge.js');

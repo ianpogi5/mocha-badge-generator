@@ -1,3 +1,5 @@
+'use strict';
+
 const fs = require('fs');
 const {resolve: pathResolve} = require('path');
 const badge = require('badge-up').v2;

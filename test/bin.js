@@ -1,3 +1,5 @@
+'use strict';
+
 const {readFile: rf} = require('fs');
 const {promisify} = require('util');
 const {resolve: pathResolve} = require('path');

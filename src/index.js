@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('mocha/lib/reporters/base');
 const {inherits} = require('mocha/lib/utils');
 

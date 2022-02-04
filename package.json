@@ -51,7 +51,7 @@
     "dependencies": {
         "badge-up": "^3.0.0",
         "command-line-basics": "^0.8.0",
-        "fast-glob": "^3.2.10"
+        "fast-glob": "^3.2.11"
     },
     "devDependencies": {
         "chai": "^4.2.0",

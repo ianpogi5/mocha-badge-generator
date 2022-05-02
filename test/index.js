@@ -1,12 +1,10 @@
-'use strict';
+import events from 'events';
+import fs from 'fs';
+import {assert} from 'chai';
+import Suite from 'mocha/lib/suite.js';
+import Test from 'mocha/lib/test.js';
 
-const events = require('events');
-const fs = require('fs');
-const {assert} = require('chai');
-const Suite = require('mocha/lib/suite');
-const Test = require('mocha/lib/test');
-
-const BadgeGenerator = require('../');
+import BadgeGenerator from '../src/index.cjs';
 
 const makeFailingTest = () => {
     return new Test('Just a failing test', function () {

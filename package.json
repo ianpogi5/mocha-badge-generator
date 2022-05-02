@@ -1,7 +1,8 @@
 {
     "name": "mocha-badge-generator",
-    "version": "0.9.0",
+    "version": "0.10.0",
     "description": "Mocha reporter which outputs badge with the number of tests passed and failed.",
+    "type": "module",
     "main": "src/index.js",
     "bin": {
         "mbg": "./bin/mbg.js",
@@ -10,17 +11,17 @@
     "scripts": {
         "build-cli": "clp --config=bin/optionDefinitions.js cli.svg",
         "bin": "./bin/mbg.js",
-        "lint": "eslint .",
+        "lint": "eslint --ext=js,cjs .",
         "json-test-report": "mocha --reporter json test > test/fixtures/test-report-mbg.json",
-        "nyc": "nyc --all --reporter=text mocha",
-        "test": "npm run lint && npm run nyc",
+        "c8": "c8 --all --reporter=text mocha",
+        "test": "npm run lint && npm run c8",
         "test-watch": "mocha -w",
-        "cov": "nyc --all --reporter=text npm test",
-        "coverage": "nyc --all --reporter=lcov npm test"
+        "cov": "c8 --all --reporter=text npm test",
+        "coverage": "c8 --all --reporter=lcov npm test"
     },
-    "nyc": {
+    "c8": {
         "exclude": [
-            ".eslintrc.js",
+            ".eslintrc.cjs",
             "coverage",
             "test"
         ]
@@ -41,8 +42,8 @@
         "Brett Zamir"
     ],
     "engines": {
-        "node": ">= 12.22.0",
-        "npm": ">= 8.3.0"
+        "node": ">=14.0.0",
+        "npm": ">=8.3.0"
     },
     "license": "MIT",
     "bugs": {
@@ -51,16 +52,16 @@
     "homepage": "https://github.com/ianpogi5/mocha-badge-generator",
     "dependencies": {
         "badge-up": "npm:@rpl/badge-up@3.0.0",
-        "command-line-basics": "^0.8.0",
+        "command-line-basics": "^1.0.2",
         "es6-template-strings": "^2.0.1",
         "fast-glob": "^3.2.12"
     },
     "devDependencies": {
+        "c8": "^7.11.2",
         "chai": "^4.3.6",
-        "command-line-publish": "^0.7.0",
+        "command-line-publish": "^1.1.0",
         "eslint": "^8.24.0",
         "mocha": "^10.0.0",
-        "nyc": "^15.1.0",
         "svg2png": "^4.1.1"
     },
     "prettier": {

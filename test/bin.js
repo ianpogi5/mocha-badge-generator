@@ -1,11 +1,11 @@
-'use strict';
+import {readFile as rf} from 'fs';
+import {promisify} from 'util';
+import {resolve as pathResolve, dirname, join} from 'path';
+import {fileURLToPath} from 'url';
+import {execFile as ef} from 'child_process';
+import {assert} from 'chai';
 
-const {readFile: rf} = require('fs');
-const {promisify} = require('util');
-const {resolve: pathResolve} = require('path');
-const {execFile: ef} = require('child_process');
-const {assert} = require('chai');
-
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const binaryPath = pathResolve(__dirname, '../', 'bin', 'mbg.js');
 const execFile = promisify(ef);
 const readFile = promisify(rf);
@@ -13,7 +13,7 @@ const readFile = promisify(rf);
 describe('Binary', function () {
     this.timeout(10000);
     it('Outputs version', async function () {
-        const {version} = require('../package.json');
+        const {version} = JSON.parse(await readFile(join(__dirname, '../package.json')));
         const {stdout, stderr} = await execFile(
             binaryPath,
             ['--version']

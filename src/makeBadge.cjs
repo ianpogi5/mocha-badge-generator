@@ -101,12 +101,11 @@ exports.makeBadgeFromJSONFile = (options) => {
             if (Object.keys(err).length) {
                 return;
             }
-
+            /* c8 ignore next 9 */
             // Mocha < 8.2.0
-            // istanbul ignore next -- Test. env is Mocha >= 8.2.0
+            // -- Test. env is Mocha >= 8.2.0
             if (duration > slow) {
               obj.speeds.slow++;
-            // istanbul ignore next -- Test. env is Mocha >= 8.2.0
             } else if (duration > slow / 2) {
               obj.speeds.medium++;
             } else {

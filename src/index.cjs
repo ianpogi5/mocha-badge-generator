@@ -3,7 +3,7 @@
 const Base = require('mocha/lib/reporters/base');
 const {inherits} = require('mocha/lib/utils');
 
-const {makeBadge} = require('./makeBadge.js');
+const {makeBadge} = require('./makeBadge.cjs');
 
 function BadgeGenerator(runner, options) {
     // We need the base for its calculation of `test.speed`

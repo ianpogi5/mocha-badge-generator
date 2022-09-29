@@ -49,16 +49,16 @@
     },
     "homepage": "https://github.com/ianpogi5/mocha-badge-generator",
     "dependencies": {
-        "badge-up": "^3.0.0",
+        "badge-up": "https://registry.npmjs.org/@rpl/badge-up/-/badge-up-3.0.0.tgz",
         "command-line-basics": "^0.8.0",
+        "es6-template-strings": "^2.0.1",
         "fast-glob": "^3.2.11"
     },
     "devDependencies": {
         "chai": "^4.2.0",
         "command-line-publish": "^0.7.0",
-        "es6-template-strings": "^2.0.1",
         "eslint": "^7.12.1",
-        "mocha": "^8.2.1",
+        "mocha": "^10.0.0",
         "nyc": "^15.1.0",
         "svg2png": "^4.1.1"
     },
@@ -71,5 +71,14 @@
         "trailingComma": "all",
         "bracketSpacing": true,
         "arrowParens": "avoid"
+    },
+    "overrides": {
+        "nth-check": "^2.0.1",
+        "package-json": "^8.1.0",
+        "uuid": "^7.0.3"
+    },
+    "engines": {
+        "node": ">= 12.22.0",
+        "npm": ">= 8.3.0"
     }
 }

@@ -49,7 +49,7 @@
     },
     "homepage": "https://github.com/ianpogi5/mocha-badge-generator",
     "dependencies": {
-        "badge-up": "https://registry.npmjs.org/@rpl/badge-up/-/badge-up-3.0.0.tgz",
+        "badge-up": "npm:@rpl/badge-up@3.0.0",
         "command-line-basics": "^0.8.0",
         "es6-template-strings": "^2.0.1",
         "fast-glob": "^3.2.11"

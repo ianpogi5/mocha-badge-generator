@@ -53,12 +53,12 @@
         "badge-up": "npm:@rpl/badge-up@3.0.0",
         "command-line-basics": "^0.8.0",
         "es6-template-strings": "^2.0.1",
-        "fast-glob": "^3.2.11"
+        "fast-glob": "^3.2.12"
     },
     "devDependencies": {
-        "chai": "^4.2.0",
+        "chai": "^4.3.6",
         "command-line-publish": "^0.7.0",
-        "eslint": "^7.12.1",
+        "eslint": "^8.24.0",
         "mocha": "^10.0.0",
         "nyc": "^15.1.0",
         "svg2png": "^4.1.1"

@@ -1,5 +1,3 @@
-'use strict';
-
 const getChalkTemplateSingleEscape = (s) => {
   return s.replace(/[{}\\]/gu, (ch) => {
     return `\\u${ch.codePointAt().toString(16).padStart(4, '0')}`;
@@ -127,5 +125,4 @@ const cliSections = [
   }
 ];
 
-exports.definitions = optionDefinitions;
-exports.sections = cliSections;
+export {optionDefinitions as definitions, cliSections as sections};

@@ -1,8 +1,6 @@
-'use strict';
+import {assert} from 'chai';
 
-const {assert} = require('chai');
-
-const {makeBadgeFromJSONFile} = require('../src/makeBadge.js');
+import {makeBadgeFromJSONFile} from '../src/makeBadge.cjs';
 
 describe('`makeBadgeFromJSONFile`', function () {
   it('`makeBadgeFromJSONFile` should throw without `file`', function () {

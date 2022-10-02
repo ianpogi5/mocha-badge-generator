@@ -8,6 +8,8 @@ node_js:
  - "18"
 before_install:
   - npm install -g codecov
+install:
+  - npm install
 script:
   - npm run coverage
   - codecov

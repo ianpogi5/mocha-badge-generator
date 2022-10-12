@@ -17,9 +17,9 @@ jobs:
                   name: id_rsa
                   known_hosts: 140.82.112.3
             - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
+            - uses: actions/setup-node@v3
               with:
-                  node-version: 12
+                  node-version: 16
             - run: npm ci
             - run: npm test
 
@@ -33,9 +33,9 @@ jobs:
                   name: id_rsa
                   known_hosts: 140.82.112.3
             - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
+            - uses: actions/setup-node@v3
               with:
-                  node-version: 12
+                  node-version: 16
                   registry-url: https://registry.npmjs.org/
             - run: npm ci
             - run: npm publish --access public
@@ -52,9 +52,9 @@ jobs:
                   name: id_rsa
                   known_hosts: 140.82.112.3
             - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
+            - uses: actions/setup-node@v3
               with:
-                  node-version: 12
+                  node-version: 16
                   registry-url: https://npm.pkg.github.com/
                   scope: '@ianpogi5'
             - run: npm ci

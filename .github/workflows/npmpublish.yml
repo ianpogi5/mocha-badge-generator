@@ -44,6 +44,7 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   registry-url: 'https://npm.pkg.github.com'
-            - run: npm publish
+                  scope: '@ianpogi5'
+            - run: npm publish --access public
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

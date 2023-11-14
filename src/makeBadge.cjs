@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 const {resolve: pathResolve} = require('path');
-const badge = require('badge-up').v2;
+const badge = require('@rpl/badge-up').v2;
 const es6Template = require('es6-template-strings');
 
 const fastGlob = require('fast-glob');
@@ -44,7 +44,7 @@ async function makeBadge ({
     const total = passes + failures;
 
     // Could use `badge.v2.sectionsToData` for more control; see `test`
-    //  in `badge-up`
+    //  in `@rpl/badge-up`
     const sections = [
         subject,
         [es6Template(textTemplate, {

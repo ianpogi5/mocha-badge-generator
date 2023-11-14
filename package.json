@@ -52,16 +52,16 @@
     "homepage": "https://github.com/ianpogi5/mocha-badge-generator",
     "dependencies": {
         "@rpl/badge-up": "3.0.0",
-        "command-line-basics": "^1.1.0",
+        "command-line-basics": "^2.0.1",
         "es6-template-strings": "^2.0.1",
-        "fast-glob": "^3.3.0"
+        "fast-glob": "^3.3.2"
     },
     "devDependencies": {
-        "c8": "^7.12.0",
-        "chai": "^4.3.7",
+        "c8": "^8.0.1",
+        "chai": "^4.3.10",
         "command-line-publish": "^1.1.0",
-        "eslint": "^8.28.0",
-        "mocha": "^10.1.0",
+        "eslint": "^8.53.0",
+        "mocha": "^10.2.0",
         "svg2png": "^4.1.1"
     },
     "prettier": {

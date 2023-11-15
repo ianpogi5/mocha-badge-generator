@@ -1,6 +1,6 @@
 {
     "name": "mocha-badge-generator",
-    "version": "0.10.6",
+    "version": "0.11.0",
     "description": "Mocha reporter which outputs badge with the number of tests passed and failed.",
     "type": "module",
     "main": "src/index.cjs",

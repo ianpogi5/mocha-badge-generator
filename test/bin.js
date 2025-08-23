@@ -1,11 +1,10 @@
 import {readFile as rf} from 'fs';
 import {promisify} from 'util';
-import {resolve as pathResolve, dirname, join} from 'path';
-import {fileURLToPath} from 'url';
+import {resolve as pathResolve, join} from 'path';
 import {execFile as ef} from 'child_process';
 import {assert} from 'chai';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = import.meta.dirname;
 const binaryPath = pathResolve(__dirname, '../', 'bin', 'mbg.js');
 const execFile = promisify(ef);
 const readFile = promisify(rf);

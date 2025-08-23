@@ -1,14 +1,13 @@
 #!/usr/bin/env node
 
-import {fileURLToPath} from 'url';
-import {join, dirname} from 'path';
 import {cliBasics} from 'command-line-basics';
 import {makeBadgeFromJSONFile} from '../src/makeBadge.cjs';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
 const optionDefinitions = await cliBasics(
-  join(__dirname, './optionDefinitions.js')
+  import.meta.dirname + '/optionDefinitions.js',
+  {
+    packageJsonPath: import.meta.dirname + '/../package.json'
+  }
 );
 
 if (!optionDefinitions) { // cliBasics handled

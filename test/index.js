@@ -52,7 +52,7 @@ const BADGE_PASSES_BUT_BAD_DURATION = './test/fixtures/bad-duration.svg';
 try {
     fs.accessSync(BADGE, fs.constants.R_OK | fs.constants.W_OK);
     fs.unlinkSync(BADGE);
-} catch (e) {
+} catch  {
     //
 }
 

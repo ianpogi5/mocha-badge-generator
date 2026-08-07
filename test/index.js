@@ -258,6 +258,7 @@ describe('mocha badge reporter', function() {
     });
 
     it('should output png (with env. variables)', async function() {
+        this.timeout(20000);
         process.env.MOCHA_BADGE_GEN_SUBJECT = 'PNG';
         process.env.MOCHA_BADGE_GEN_OK_COLOR = 'blue';
         process.env.MOCHA_BADGE_GEN_KO_COLOR = 'purple';

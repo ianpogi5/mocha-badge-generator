@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import {cliBasics} from 'command-line-basics';
-import {makeBadgeFromJSONFile} from '../src/makeBadge.cjs';
+import {makeBadgeFromJSONFile} from '../src/makeBadge.js';
 
 const optionDefinitions = await cliBasics(
   import.meta.dirname + '/optionDefinitions.js',

@@ -1,10 +1,9 @@
-import events from 'events';
-import fs from 'fs';
+import events from 'node:events';
+import fs from 'node:fs';
+import {Suite, Test} from 'mocha';
 import {assert} from 'chai';
-import Suite from 'mocha/lib/suite.js';
-import Test from 'mocha/lib/test.js';
 
-import BadgeGenerator from '../src/index.cjs';
+import BadgeGenerator from '../src/index.js';
 
 const makeFailingTest = () => {
     return new Test('Just a failing test', function () {

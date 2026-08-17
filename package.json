@@ -3,7 +3,7 @@
     "version": "0.12.0",
     "description": "Mocha reporter which outputs badge with the number of tests passed and failed.",
     "type": "module",
-    "main": "src/index.cjs",
+    "main": "src/index.js",
     "bin": {
         "mbg": "./bin/mbg.js",
         "mocha-badge-generator": "./bin/mbg.js"
@@ -50,19 +50,22 @@
     },
     "homepage": "https://github.com/ianpogi5/mocha-badge-generator",
     "dependencies": {
-        "@cumulusds/badge-up": "3.0.0",
+        "@cumulusds/badge-up": "3.0.1",
         "command-line-basics": "^3.0.0",
         "es6-template-strings": "^2.0.1",
         "fast-glob": "^3.3.3"
+    },
+    "peerDependencies": {
+        "mocha": ">= 12.0.0"
     },
     "devDependencies": {
         "@eslint/js": "^10.0.1",
         "c8": "^12.0.0",
         "chai": "^6.2.2",
-        "command-line-publish": "^1.1.0",
-        "eslint": "^10.8.0",
-        "globals": "^17.9.0",
-        "mocha": "^11.8.0",
+        "command-line-publish": "^2.0.0",
+        "eslint": "^10.9.1",
+        "globals": "^17.11.0",
+        "mocha": "^12.0.0",
         "svg2png": "^4.1.1"
     },
     "prettier": {

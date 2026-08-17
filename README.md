@@ -90,7 +90,7 @@ may call for creating a badge based on already-generated JSON test file results
 ### `makeBadge`
 
 ```js
-const {makeBadge} = require('mocha-badge-generator/makeBadge');
+import {makeBadge} from 'mocha-badge-generator/makeBadge.js';
 makeBadge({
     // REQUIRED
     passes,
@@ -116,7 +116,7 @@ makeBadge({
 You can make a badge out of a Mocha JSON reporter report (as a JSON file).
 
 ```js
-const {makeBadgeFromJSONFile} = require('mocha-badge-generator/makeBadge');
+import {makeBadgeFromJSONFile} from 'mocha-badge-generator/makeBadge.js';
 makeBadgeFromJSONFile({
     // REQUIRED
     // This JSON file expects the structure: `{stats: {passes, failures}}`

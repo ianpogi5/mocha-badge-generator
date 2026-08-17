@@ -1,11 +1,11 @@
-'use strict';
+import fs from 'node:fs';
+import {resolve as pathResolve} from 'node:path';
+import badgeUp from '@cumulusds/badge-up';
 
-const fs = require('fs');
-const {resolve: pathResolve} = require('path');
-const badge = require('@cumulusds/badge-up').v2;
-const es6Template = require('es6-template-strings');
+import es6Template from 'es6-template-strings';
+import fastGlob from 'fast-glob';
 
-const fastGlob = require('fast-glob');
+const badge = badgeUp.v2;
 
 async function makeBadge ({
     passes, failures,
@@ -57,7 +57,7 @@ async function makeBadge ({
     ];
     let output = await badge(sections);
     if (format === 'png') {
-        output = require('svg2png').sync(output);
+        output = (await import('svg2png')).sync(output);
     }
 
     return new Promise((resolve, reject) => {
@@ -72,7 +72,7 @@ async function makeBadge ({
     });
 }
 
-exports.makeBadgeFromJSONFile = (options) => {
+export const makeBadgeFromJSONFile = (options) => {
     if (
         (!options.fileGlob || !options.fileGlob.length) &&
         (!options.file || !options.file.length)
@@ -119,10 +119,16 @@ exports.makeBadgeFromJSONFile = (options) => {
             options.file = options.file || [];
             options.file.push(...await fastGlob(options.fileGlob));
         }
+
+        const fileData = await Promise.all(options.file.map(async (file) => {
+            return (await import(pathResolve(process.cwd(), file), {
+                with: {type: 'json'}
+            })).default;
+        }));
+
         const {
             passes, failures, duration, speeds
-        } = options.file.reduce((obj, file) => {
-            const data = require(pathResolve(process.cwd(), file));
+        } = fileData.reduce((obj, data) => {
             const {
                 stats: {passes, failures, duration},
                 tests,
@@ -151,8 +157,9 @@ exports.makeBadgeFromJSONFile = (options) => {
             slow: 0,
             medium: 0
         }});
+
         return makeBadge({passes, failures, options, duration, speeds});
     })();
 };
 
-exports.makeBadge = makeBadge;
+export {makeBadge};

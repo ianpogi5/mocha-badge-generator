@@ -61,7 +61,7 @@ describe('Binary', function () {
             binaryPath,
             [
                 '--file',
-                pathResolve(__dirname, 'fixtures', 'test-report-mbg.json'),
+                pathResolve(__dirname, 'fixtures', 'test-report-mbg-copy.json'),
                 '--badge_output',
                 './test/results/badge-template.svg',
                 '--badge_template',
@@ -83,7 +83,7 @@ describe('Binary', function () {
             [
                 '--slow', '2000',
                 '--file',
-                pathResolve(__dirname, 'fixtures', 'test-report-mbg.json'),
+                pathResolve(__dirname, 'fixtures', 'test-report-mbg-copy.json'),
                 '--badge_output',
                 './test/results/badge-template-slow.svg',
                 '--badge_template',
